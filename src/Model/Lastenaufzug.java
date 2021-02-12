@@ -2,29 +2,29 @@ package Model;
 
 public class Lastenaufzug extends Aufzug {
 
-    // Attribute, welche den Personenaufzug auszeichnen
-    private double quadratmeter;
-    private boolean kleinOderGross;
+	// Attribute, welche den Personenaufzug auszeichnen
+	private int quadratmeter;
+	private boolean kleinOderGross;
 
-    //Getter u Setter
-    public double getQuadratmeter() {
-        return quadratmeter;
-    }
+	// Getter u Setter
+	public int getQuadratmeter() {
+		return quadratmeter;
+	}
 
-    public void setQuadratmeter(double quadratmeter) {
-        this.quadratmeter = quadratmeter;
-    }
+	public void setQuadratmeter(int quadratmeter) {
+		this.quadratmeter = quadratmeter;
+	}
 
-    public boolean isKleinOderGross() {
-        return kleinOderGross;
-    }
+	public boolean isKleinOderGross() {
+		return kleinOderGross;
+	}
 
-    public void setKleinOderGross(boolean kleinOderGross) {
-        this.kleinOderGross = kleinOderGross;
-    }
+	public void setKleinOderGross(boolean kleinOderGross) {
+		this.kleinOderGross = kleinOderGross;
+	}
 
-    // Angeben, welche Last der Aufzug momentan befördert
-    private void lastAngeben() {
+	// Angeben, welche Last der Aufzug momentan befördert
+	private void lastAngeben() {
 
-    }
+	}
 }

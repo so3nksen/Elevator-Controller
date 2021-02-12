@@ -2,53 +2,60 @@ package Model;
 
 public class Aufzug {
 
-    //Notwendige Kriterien eines jeden Aufzugs
-    private int personenzahl;
-    private double gesamtgewicht;
-    private int aktuellesStockwerk;
+	// Notwendige Kriterien eines jeden Aufzugs
+	private int id;
+	private int personenzahl;
+	private int gesamtgewicht;
+	private int aktuellesStockwerk;
 
+	// Getter u. Setter
+	public int getId() {
+		return id;
+	}
 
-    // Getter u. Setter
-    public int getPersonenzahl() {
-        return personenzahl;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public void setPersonenzahl(int personenzahl) {
-        this.personenzahl = personenzahl;
-    }
+	public int getPersonenzahl() {
+		return personenzahl;
+	}
 
-    public double getGesamtgewicht() {
-        return gesamtgewicht;
-    }
+	public void setPersonenzahl(int personenzahl) {
+		this.personenzahl = personenzahl;
+	}
 
-    public void setGesamtgewicht(double gesamtgewicht) {
-        this.gesamtgewicht = gesamtgewicht;
-    }
+	public int getGesamtgewicht() {
+		return gesamtgewicht;
+	}
 
-    public int getAktuellesStockwerk() {
-        return aktuellesStockwerk;
-    }
+	public void setGesamtgewicht(int gesamtgewicht) {
+		this.gesamtgewicht = gesamtgewicht;
+	}
 
-    public void setAktuellesStockwerk(int aktuellesStockwerk) {
-        this.aktuellesStockwerk = aktuellesStockwerk;
-    }
+	public int getAktuellesStockwerk() {
+		return aktuellesStockwerk;
+	}
 
+	public void setAktuellesStockwerk(int aktuellesStockwerk) {
+		this.aktuellesStockwerk = aktuellesStockwerk;
+	}
 
-    //Die Methoden, die jede Aufzugart besitzt
-    private void hochfahren() {
+	// Die Methoden, die jede Aufzugart besitzt
+	private void hochfahren() {
 
-    }
+	}
 
-    private void runterfahren() {
+	private void runterfahren() {
 
-    }
+	}
 
-    private void auslesen() {
+	private void auslesen() {
 
-    }
+	}
 
-    private void speichern() {
+	private void speichern() {
 
-    }
+	}
 
 }
