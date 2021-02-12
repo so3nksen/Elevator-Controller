@@ -31,3 +31,6 @@ hs_err_pid*
 
 # .ds
 .DS_Store
+
+# intellij
+.idea/* 
