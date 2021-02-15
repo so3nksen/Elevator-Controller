@@ -44,6 +44,7 @@ public class Aufzug {
 	// Die Methoden, die jede Aufzugart besitzt
 	private void hochfahren() {
 
+		// Hier werden dann die internen Methoden aufgerufen
 	}
 
 	private void runterfahren() {

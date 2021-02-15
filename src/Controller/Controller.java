@@ -1,7 +1,6 @@
 package Controller;
 
 import java.io.File;
-
 import GUI.Gui;
 import Model.Aufzug;
 import Model.ElevatorTypes;
