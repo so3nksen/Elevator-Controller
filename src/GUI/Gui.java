@@ -1,31 +1,27 @@
 package GUI;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.net.http.WebSocket;
 
 import static java.lang.Double.parseDouble;
 
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
 public class Gui {
 
 	static String DEFINE_PASSENGER_TYPE = "Was möchten Sie transportieren?";
 
-	// private ViewController viewController;
-	// private ViewController.GuiListener guiListener;
+
+	private ViewController viewController;
+	private ViewController.GuiListener guiListener;
 	private JButton btnPersonen;
 	private JButton btnGueter;
 
 	private JTextField eingabe;
 	private JTextArea anweisungen;
 
-	// All widgets are added to the Frame already and will be set invisible to call
-	// if needed.
+	// All widgets are added to the Frame already and will be set invisible to call if needed.
 	private void build() {
 		JFrame frame = new JFrame();
 		JPanel mainPane = new JPanel();
@@ -42,20 +38,20 @@ public class Gui {
 		mainPane.add(btnPersonen);
 		mainPane.add(btnGueter);
 
-		// Make these widgets invisible first, because we'll need them only, if the
-		// elevator is called
+		//Make these widgets invisible first, because we'll need them only, if the elevator is called
 		btnPersonen.setVisible(false);
 		btnGueter.setVisible(false);
 		eingabe.setVisible(false);
 		anweisungen.setVisible(false);
 
 		// Add action listener to widgets
-		// btnGueter.addActionListener(guiListener);
+		btnGueter.addActionListener(guiListener);
 
 		frame.add(mainPane);
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
+
 
 	}
 
@@ -66,7 +62,7 @@ public class Gui {
 	}
 
 	private double enterCarriageType(String personsOrGoods) {
-		double userInput = 0;
+		 double userInput = 0;
 
 		anweisungen.setVisible(true);
 
@@ -79,6 +75,8 @@ public class Gui {
 			userInput = parseDouble(eingabe.getText());
 
 		}
+
+
 
 		return userInput;
 	}

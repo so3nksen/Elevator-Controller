@@ -1,8 +1,7 @@
 package Controller;
 
 import java.io.File;
-
-import GUI.MainGui;
+import GUI.Gui;
 import Model.Aufzug;
 import Model.ElevatorTypes;
 import Util.CsvReader;
@@ -11,6 +10,7 @@ import Util.MoveElevator;
 import Util.NearestFloor;
 import Util.Props;
 import Util.SaveCsvData;
+import Util.SearchElevator;
 
 /**
  * Programm controller.
@@ -26,8 +26,8 @@ public class Controller {
 		Props.ABSOLUTE_PATH = new File("").getAbsolutePath();
 
 		// start gui
-		MainGui gui = new MainGui();
-		gui.init();
+		Gui gui = new Gui();
+		gui.start();
 
 		// read .csv on programm start
 		CsvReader csv = new CsvReader();
@@ -42,12 +42,13 @@ public class Controller {
 		NearestFloor.serach(ElevatorTypes.FREIGHT_SMALL, myfloor);
 
 		// TEST OF "MOVING ELEVATORS"
-		MoveElevator.move(1, 1);
-		MoveElevator.move(2, 1);
-		MoveElevator.move(3, 1);
+		MoveElevator m = new MoveElevator();
+		m.move(1, 1);
+		m.move(2, 1);
+		m.move(3, 1);
 
 		// TEST OF ELEVATOR SEARCH
-		// System.out.println(SearchElevator.search(1, 10, 10, 0, false));
+		System.out.println(SearchElevator.search(1, 10, 10, 0, false));
 
 		// TEST OF ELEVATOR INFOS
 		ElevatorInfos i = new ElevatorInfos();
@@ -57,5 +58,6 @@ public class Controller {
 		SaveCsvData.save();
 
 	}
+
 
 }
