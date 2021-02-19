@@ -5,7 +5,7 @@ import Model.AufzugList;
 
 public class MoveElevator {
 
-	public void move(int id, int toFloor) {
+	public static void move(int id, int toFloor) {
 
 		for (Aufzug e : AufzugList.getList()) {
 
