@@ -65,7 +65,17 @@ public class Controller {
 
 	public void callElevator() {
 
-		do
+		while (gui.isElevatorCalled() == false) {
+			// do nothing
+		}
+
+		if (gui.isElevatorCalled() == true) {
+			gui.elevatorCallingScreen();
+			//check Weight/Persons
+			// search elevator
+			// move elevator
+
+		}
 
 	}
 

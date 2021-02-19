@@ -1,12 +1,11 @@
 package GUI;
 
-import Controller.Controller;
+import Util.SearchElevator;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.http.WebSocket;
 
 import static java.lang.Double.parseDouble;
 
@@ -15,7 +14,8 @@ public class Gui {
 
 	static String DEFINE_PASSENGER_TYPE = "Was möchten Sie transportieren?";
 
-	private boolean elevatorWasCalled;
+
+	private boolean elevatorCalled;
 	private GuiListener guiListener;
 
 	private JButton aufzugRufen;
@@ -24,6 +24,13 @@ public class Gui {
 
 	private JTextField eingabe;
 	private JTextArea anweisungen;
+
+
+	private int momentanesStockwerk;
+	private int gesuchtesStockwerk;
+	private int angegebenePersonen;
+	private int angegebenesGewicht;
+	private boolean vip;
 
 	// All widgets are added to the Frame already and will be set invisible to call if needed.
 	private void build() {
@@ -65,7 +72,7 @@ public class Gui {
 
 	}
 
-	private double enterCarriageType(String personsOrGoods) {
+	private int enterCarriageType(String personsOrGoods) {
 		 double userInput = 0;
 
 		anweisungen.setVisible(true);
@@ -88,29 +95,37 @@ public class Gui {
 	public void start() {
 		build();
 		System.out.println("Gui starting...");
-		makePersonsOrGoodsVisible();
 	}
+
+	// Returns necessary information for Controller to call screen
+	public void elevatorCallingScreen() {
+		makePersonsOrGoodsVisible();
+		SearchElevator.search(angegebenesGewicht, angegebenePersonen, momentanesStockwerk, gesuchtesStockwerk, vip)
+		// wait for userinput in 'eingabe'
+
+	}
+
+	public boolean isElevatorCalled() {
+		return elevatorCalled;
+	}
+
 
 	public class GuiListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == btnGueter) {
-				double goodsWeight = enterCarriageType("goods");
+				angegebenesGewicht = enterCarriageType("goods");
 				// if not above max, inform controller to call elevatr
 			}
 
 			if (e.getSource() == btnPersonen) {
-				enterCarriageType("persons");
+				angegebenePersonen = enterCarriageType("persons");
 				// enter enter number of persons
 			}
 
-			if (e.getSource() == eingabe) {
-
-			}
-
 			if (e.getSource() == aufzugRufen) {
-
+				elevatorCalled = true;
 
 			}
 		}
