@@ -1,8 +1,6 @@
 package Controller;
 
 import java.io.File;
-import java.util.ArrayList;
-
 import GUI.Gui;
 import Model.Aufzug;
 import Model.ElevatorTypes;
@@ -21,8 +19,6 @@ import Util.SearchElevator;
  *
  */
 public class Controller {
-
-	Gui gui;
 
 	public static void main(String[] args) {
 
@@ -60,22 +56,6 @@ public class Controller {
 
 		// TEST OF SAVING .CSV
 		SaveCsvData.save();
-
-	}
-
-	public void callElevator() {
-
-		while (gui.isElevatorCalled() == false) {
-			// do nothing
-		}
-
-		if (gui.isElevatorCalled() == true) {
-			gui.elevatorCallingScreen();
-			//check Weight/Persons
-			// search elevator
-			// move elevator
-
-		}
 
 	}
 

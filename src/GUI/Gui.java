@@ -1,11 +1,9 @@
 package GUI;
-
-import Util.SearchElevator;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.http.WebSocket;
 
 import static java.lang.Double.parseDouble;
 
@@ -15,28 +13,19 @@ public class Gui {
 	static String DEFINE_PASSENGER_TYPE = "Was möchten Sie transportieren?";
 
 
-	private boolean elevatorCalled;
-	private GuiListener guiListener;
-
-	private JButton aufzugRufen;
+	private ViewController viewController;
+	private ViewController.GuiListener guiListener;
 	private JButton btnPersonen;
 	private JButton btnGueter;
 
 	private JTextField eingabe;
 	private JTextArea anweisungen;
 
-
-	private int momentanesStockwerk;
-	private int gesuchtesStockwerk;
-	private int angegebenePersonen;
-	private int angegebenesGewicht;
-	private boolean vip;
-
 	// All widgets are added to the Frame already and will be set invisible to call if needed.
 	private void build() {
 		JFrame frame = new JFrame();
 		JPanel mainPane = new JPanel();
-		aufzugRufen = new JButton("Aufzug rufen");
+		JButton aufzugRufen = new JButton("Aufzug rufen");
 		btnPersonen = new JButton("Personen");
 		btnGueter = new JButton("Güter");
 		eingabe = new JTextField();
@@ -72,7 +61,7 @@ public class Gui {
 
 	}
 
-	private int enterCarriageType(String personsOrGoods) {
+	private double enterCarriageType(String personsOrGoods) {
 		 double userInput = 0;
 
 		anweisungen.setVisible(true);
@@ -95,37 +84,24 @@ public class Gui {
 	public void start() {
 		build();
 		System.out.println("Gui starting...");
-	}
-
-	// Returns necessary information for Controller to call screen
-	public void elevatorCallingScreen() {
 		makePersonsOrGoodsVisible();
-		SearchElevator.search(angegebenesGewicht, angegebenePersonen, momentanesStockwerk, gesuchtesStockwerk, vip)
-		// wait for userinput in 'eingabe'
-
 	}
-
-	public boolean isElevatorCalled() {
-		return elevatorCalled;
-	}
-
 
 	public class GuiListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == btnGueter) {
-				angegebenesGewicht = enterCarriageType("goods");
+				double goodsWeight = enterCarriageType("goods");
 				// if not above max, inform controller to call elevatr
 			}
 
 			if (e.getSource() == btnPersonen) {
-				angegebenePersonen = enterCarriageType("persons");
+				enterCarriageType("persons");
 				// enter enter number of persons
 			}
 
-			if (e.getSource() == aufzugRufen) {
-				elevatorCalled = true;
+			if (e.getSource() == eingabe) {
 
 			}
 		}
