@@ -1,4 +1,7 @@
 package GUI;
+
+import Controller.Controller;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,9 +15,10 @@ public class Gui {
 
 	static String DEFINE_PASSENGER_TYPE = "Was möchten Sie transportieren?";
 
+	private boolean elevatorWasCalled;
+	private GuiListener guiListener;
 
-	private ViewController viewController;
-	private ViewController.GuiListener guiListener;
+	private JButton aufzugRufen;
 	private JButton btnPersonen;
 	private JButton btnGueter;
 
@@ -25,7 +29,7 @@ public class Gui {
 	private void build() {
 		JFrame frame = new JFrame();
 		JPanel mainPane = new JPanel();
-		JButton aufzugRufen = new JButton("Aufzug rufen");
+		aufzugRufen = new JButton("Aufzug rufen");
 		btnPersonen = new JButton("Personen");
 		btnGueter = new JButton("Güter");
 		eingabe = new JTextField();
@@ -102,6 +106,11 @@ public class Gui {
 			}
 
 			if (e.getSource() == eingabe) {
+
+			}
+
+			if (e.getSource() == aufzugRufen) {
+
 
 			}
 		}
