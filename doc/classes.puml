@@ -1,30 +1,88 @@
 @startuml
 'https://plantuml.com/class-diagram
+package "Elevator-Controller" {
+package "Controller"{
+class Controller
+}
+package "fahrstuehle"{
+class Aufzug {
+int Personenzahl
+int maxGewicht
+int aktuellesStockwerk
+}
 
-class Aufzug
-class Aufzugfahrt
-class LastenAufzug
+class Aufzugfahrt {
+String AufzugTyp
+int fahrtGewicht
+int personenZahl
+private int gefahreneStockwerke
+}
+
+class LastenAufzug{
+int qm
+}
 class MainGui
-class PersonenAufzug
-class ViPAufzug
+class PersonenAufzug {
+boolean Melodie
+}
 
-Aufzug <|-- LastenAufzug
-Aufzug <|-- PersonenAufzug
-Aufzug <|-- ViPAufzug
+class ViPAufzug {
+int maxKmh
+}
+}
 
-Aufzug : int Personenzahl
-Aufzug : int maxGewicht
-Aufzug : int aktuellesStockwerk
+package "Gui"{
+class Gui
+class GuiListener
+}
 
-LastenAufzug : int qm
+package "Model"{
+class Aufzug1
+class AufzugList
+enum ElevatorTypes
+class LastenAufzug1
+class Personenaufzug
+class VIPAufzug
+}
+package "Util"{
+class CsvReader
+class ElevatorInfos {
+getInfos()
+}
+class MoveElevator {
+move()
+}
+class NearestFloor
+class Props {
+String ABSOLUTE_PATH
+String PERSON_ELEVATOR
+String FREIGHT_ELEVATOR
+String VIP_ELEVATOR
+}
+class RequestElevator
+class SaveCSVData
+class SearchElevator
+}
 
-PersonenAufzug : boolean Melodie
+package "CSV Tabellen" {
+circle freightElevators
+circle personElevators
+circle statistics
+circle vipElevators
+}
+}
 
-ViPAufzug : int maxKmh
+freightElevators .. CsvReader
+personElevators .. CsvReader
+vipElevators .. CsvReader
 
-Aufzugfahrt : String AufzugTyp
-Aufzugfahrt : int fahrtGewicht
-Aufzugfahrt : int personenZahl
-Aufzugfahrt : private int gefahreneStockwerke
+Props .. freightElevators
+Props .. personElevators
+Props .. vipElevators
+
+Aufzug --|> LastenAufzug
+Aufzug --|> PersonenAufzug
+Aufzug --|> ViPAufzug
+
 
 @enduml
