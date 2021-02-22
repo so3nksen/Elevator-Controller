@@ -1,70 +1,213 @@
+Klassendiagramm unseres Projektes
+
 @startuml
-'https://plantuml.com/class-diagram
-package "Elevator-Controller" {
-package "Controller"{
-class Controller
+package "Elevator-Controller"  {
+package "Controller" #DDDDDD{
+class Controller {
+__public__
+main()
 }
-package "fahrstuehle"{
+}
+package "fahrstuehle"#DDDDDD{
 class Aufzug {
 int Personenzahl
 int maxGewicht
 int aktuellesStockwerk
+__public__
+Aufzug()
+..Getter..
++getPersonenZahl()
++getMaxGewicht()
++getAktuellesStockwerk()
+..Setter..
+#setPersonenZahl()
+#setMaxGewicht()
+#setAktuellesStockwerk()
 }
 
 class Aufzugfahrt {
+__private__
 String AufzugTyp
 int fahrtGewicht
 int personenZahl
-private int gefahreneStockwerke
+int gefahreneStockwerke
+__public__
+Aufzugfahrt()
+..Getter..
++getAufzugTyp()
++getFahrtGewicht()
++getPersonenZahl()
++getGefahreneStockwerke()
+..Setter..
+#setAufzugTyp()
+#setFahrtGewicht()
+#setPersonenZahl()
+#setGefahreneStockwerke()
 }
 
-class LastenAufzug{
+class LastenAufzug<extends Aufzug>{
+__private__
 int qm
+__public__
+LastenAufzug()
+..Getter..
++getQm()
+..Setter..
+#setQm()
 }
 class MainGui
-class PersonenAufzug {
+class PersonenAufzug<extends Aufzug>{
+__private__
 boolean Melodie
+__public__
+PersonenAufzug()
+..Getter..
++getMelodie()
+..Setter..
+#setMelodie()
 }
 
-class ViPAufzug {
+class ViPAufzug<extends Aufzug>{
+__private__
 int maxKmh
+__public__
+VipAufzug()
+..Getter..
++getMaxKmh()
+..Setter..
+#setMaxKmh()
 }
 }
 
-package "Gui"{
+package "Gui"#DDDDDD{
 class Gui
 class GuiListener
 }
 
-package "Model"{
-class Aufzug1
-class AufzugList
-enum ElevatorTypes
-class LastenAufzug1
-class Personenaufzug
-class VIPAufzug
+package "Model"#DDDDDD{
+class Aufzug1 {
+__private__
+int id
+int personenzahl
+int gesamtgewicht
+int aktuellesStockwerk
+--
+hochfahren()
+runterfahren()
+auslesen()
+speichern()
+__public__
+..Getter..
++getId()
++getPersonenzahl()
++getGesamtgewicht()
++getAktuellesStockwerk()
+..Setter..
+#setId()
+#setPersonenzahl()
+#setGesamtgewicht()
+#setAktuellesStockwerk()
 }
-package "Util"{
-class CsvReader
+class AufzugList {
+Arrrayslist Aufzug
+???????????
+???????????
+}
+enum ElevatorTypes {
+PERSON_SMALL, PERSON_BIG, FREIGHT_SMALL, FREIGHT_BIG, VIP, FREIGHT, PERSON
+
+}
+class Lastenaufzug {
+__private__
+int quadratmeter
+boolean kleinOderGross
+__
+lastAngeben()
+__public__
+..Getter..
++getQuadratmeter()
+..Setter..
+#setQuadratmeter()
+#setKleinOderGross()
+}
+class Personenaufzug {
+__private__
+String aufzugsMelodie
+boolean kleinOderGross
+__
+personenUndLastAngeben()
+__public__
+..Getter..
++getAufzugsMelodie()
++getRaumGroesse()
+..Setter..
+#setAufzugsMelodie()
+#setRaumGroesse()
+}
+class VIPAufzug {
+__private__
+String passwort
+int maxGeschwindigkeit
+__
+personenUndLastAngeben()
+__public__
+..Getter..
++getPasswort()
++getMaxGeschwindigkeit()
+..Setter..
+#setPasswort()
+#setMaxGeschwindigkeit()
+}
+}
+package "Util"#DDDDDD{
+class CsvReader {
+__private__
+readPersonElevators()
+readFreightElevators()
+readVIPElevators()
+__public__
+read()
+}
 class ElevatorInfos {
+__public__
 getInfos()
 }
 class MoveElevator {
+__public__
 move()
 }
-class NearestFloor
+class NearestFloor {
+__public__
+serach()
+}
 class Props {
+__public__
 String ABSOLUTE_PATH
 String PERSON_ELEVATOR
 String FREIGHT_ELEVATOR
 String VIP_ELEVATOR
 }
-class RequestElevator
-class SaveCSVData
-class SearchElevator
+class RequestElevator {
+__public__
+reuqest()
+}
+class SaveCSVData{
+__private__
+savePersonElevator()
+saveFreightElevators()
+saveVipElevators()
+writeToFile()
+__public__
+save()
 }
 
-package "CSV Tabellen" {
+class SearchElevator {
+__public__
+search()
+}
+}
+
+package "CSV Tabellen" <<Database>> #3CB371{
 circle freightElevators
 circle personElevators
 circle statistics
@@ -72,17 +215,12 @@ circle vipElevators
 }
 }
 
-freightElevators .. CsvReader
-personElevators .. CsvReader
-vipElevators .. CsvReader
+"Util" ..|> "CSV Tabellen" : Save
+"CSV Tabellen" ..|> "Util" : Read, Search
 
-Props .. freightElevators
-Props .. personElevators
-Props .. vipElevators
-
-Aufzug --|> LastenAufzug
-Aufzug --|> PersonenAufzug
-Aufzug --|> ViPAufzug
+Aufzug --* LastenAufzug
+Aufzug --* PersonenAufzug
+Aufzug --* ViPAufzug
 
 
 @enduml
