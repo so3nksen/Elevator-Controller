@@ -4,6 +4,17 @@ import Model.ElevatorTypes;
 
 public class SearchElevator {
 
+	/**
+	 * Method looks for the needed elevator type with given params.
+	 * 
+	 * @param weight
+	 * @param persons
+	 * @param fromFloor
+	 * @param toFloor
+	 * @param type
+	 * @param isVipRequest
+	 * @return -> The elevator type that fits.
+	 */
 	public static ElevatorTypes search(int weight, int persons, int fromFloor, int toFloor, ElevatorTypes type,
 			boolean isVipRequest) {
 

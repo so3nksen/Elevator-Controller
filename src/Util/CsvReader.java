@@ -9,8 +9,17 @@ import Model.Lastenaufzug;
 import Model.Personenaufzug;
 import Model.VIPAufzug;
 
+/**
+ * Util class managing reading all .csv data on programm start
+ * 
+ * @author lasse
+ *
+ */
 public class CsvReader {
 
+	/**
+	 * init reading process of all .csv documents.
+	 */
 	public void read() {
 		// console status
 		System.out.println("Reading csv...");
@@ -22,6 +31,9 @@ public class CsvReader {
 
 	}
 
+	/**
+	 * Reads all elevators in personElevators.csv
+	 */
 	private void readPersonElevators() {
 
 		try (FileReader reader = new FileReader(Props.ABSOLUTE_PATH + Props.PERSON_ELEVATOR);
@@ -52,6 +64,9 @@ public class CsvReader {
 		}
 	}
 
+	/**
+	 * Reads all elevators in freightElevators.csv
+	 */
 	private void readFreightElevators() {
 
 		try (FileReader reader = new FileReader(Props.ABSOLUTE_PATH + Props.FREIGHT_ELEVATOR);
@@ -82,6 +97,9 @@ public class CsvReader {
 		}
 	}
 
+	/**
+	 * Reads all elevators in vipElevators.csv
+	 */
 	private void readVIPElevators() {
 
 		try (FileReader reader = new FileReader(Props.ABSOLUTE_PATH + Props.VIP_ELEVATOR);

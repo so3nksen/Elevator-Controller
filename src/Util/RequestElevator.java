@@ -2,8 +2,25 @@ package Util;
 
 import Model.ElevatorTypes;
 
+/**
+ * Util class to request elevator.
+ * 
+ * @author lasse
+ *
+ */
 public class RequestElevator {
 
+	/**
+	 * Request elevator with given values. Method calls further utils. Only
+	 * connection to "frontend" gui.
+	 * 
+	 * @param fromFloor      -> floor elevator should start from.
+	 * @param toFloor        -> floor elevator should move to.
+	 * @param persons        -> number of persons to transport.
+	 * @param weight         -> weight to transport.
+	 * @param type           -> type of elevator
+	 * @param isVipRequested -> should it be a vip elevator?
+	 */
 	public static void reuqest(int fromFloor, int toFloor, int persons, int weight, ElevatorTypes type,
 			boolean isVipRequested) {
 

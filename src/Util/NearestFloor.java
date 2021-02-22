@@ -7,8 +7,21 @@ import Model.Lastenaufzug;
 import Model.Personenaufzug;
 import Model.VIPAufzug;
 
+/**
+ * Util class to find closest elevator.
+ * 
+ * @author lasse
+ *
+ */
 public class NearestFloor {
 
+	/**
+	 * Search closest elevator of specific type to actual position in building.
+	 * 
+	 * @param type    -> type of elevator to look for
+	 * @param myFloor -> the position in building.
+	 * @return
+	 */
 	public static int serach(ElevatorTypes type, int myFloor) {
 
 		int distanceBetween = 999999999;

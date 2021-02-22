@@ -3,8 +3,20 @@ package Util;
 import Model.Aufzug;
 import Model.AufzugList;
 
+/**
+ * Util class moving elevator.
+ * 
+ * @author lasse
+ *
+ */
 public class MoveElevator {
 
+	/**
+	 * Moving elevator.
+	 * 
+	 * @param id      -> id of elevator to move.
+	 * @param toFloor -> floor elecator should move to.
+	 */
 	public static void move(int id, int toFloor) {
 
 		for (Aufzug e : AufzugList.getList()) {
