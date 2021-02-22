@@ -12,10 +12,19 @@ Aufzug <|-- LastenAufzug
 Aufzug <|-- PersonenAufzug
 Aufzug <|-- ViPAufzug
 
-Aufzug : Personenzahl
-Aufzug : maxGewicht
-Aufzug : aktuellesStockwerk
+Aufzug : int Personenzahl
+Aufzug : int maxGewicht
+Aufzug : int aktuellesStockwerk
 
-LastenAufzug : qm
+LastenAufzug : int qm
+
+PersonenAufzug : boolean Melodie
+
+ViPAufzug : int maxKmh
+
+Aufzugfahrt : String AufzugTyp
+Aufzugfahrt : int fahrtGewicht
+Aufzugfahrt : int personenZahl
+Aufzugfahrt : private int gefahreneStockwerke
 
 @enduml
