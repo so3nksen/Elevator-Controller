@@ -21,7 +21,7 @@ public class RequestElevator {
 	 * @param type           -> type of elevator
 	 * @param isVipRequested -> should it be a vip elevator?
 	 */
-	public static void reuqest(int fromFloor, int toFloor, int persons, int weight, ElevatorTypes type,
+	public void request(int fromFloor, int toFloor, int persons, int weight, ElevatorTypes type,
 			boolean isVipRequested) {
 
 		System.out.println(
@@ -33,10 +33,12 @@ public class RequestElevator {
 		ElevatorTypes typeOfElevator = SearchElevator.search(weight, persons, fromFloor, toFloor, type, isVipRequested);
 
 		// get id of the closest elevator
-		int idOfClosestElevator = NearestFloor.serach(typeOfElevator, fromFloor);
+		NearestFloor nf = new NearestFloor();
+		int idOfClosestElevator = nf.serach(typeOfElevator, fromFloor);
 
 		// move elevator to floor required
-		MoveElevator.move(idOfClosestElevator, toFloor);
+		MoveElevator m = new MoveElevator();
+		m.move(idOfClosestElevator, toFloor);
 
 	}
 }

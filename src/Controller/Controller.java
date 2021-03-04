@@ -3,7 +3,7 @@ package Controller;
 import java.io.File;
 
 import GUI.MainGui;
-import Model.Aufzug;
+import Model.Elevator;
 import Model.ElevatorTypes;
 import Util.CsvReader;
 import Util.ElevatorInfos;
@@ -39,22 +39,25 @@ public class Controller {
 		// ++++++++++++++++++
 		// TEST OF SERACHING NEXT ELEVATOR
 		int myfloor = 1;
-		NearestFloor.serach(ElevatorTypes.FREIGHT_SMALL, myfloor);
+		NearestFloor nf = new NearestFloor();
+		nf.serach(ElevatorTypes.FREIGHT_SMALL, myfloor);
 
 		// TEST OF "MOVING ELEVATORS"
-		MoveElevator.move(1, 1);
-		MoveElevator.move(2, 1);
-		MoveElevator.move(3, 1);
+		MoveElevator me = new MoveElevator();
+		me.move(1, 1);
+		me.move(2, 1);
+		me.move(3, 1);
 
 		// TEST OF ELEVATOR SEARCH
 		// System.out.println(SearchElevator.search(1, 10, 10, 0, false));
 
 		// TEST OF ELEVATOR INFOS
 		ElevatorInfos i = new ElevatorInfos();
-		Aufzug e = i.getInfos(49);
+		Elevator e = i.getInfos(49);
 
 		// TEST OF SAVING .CSV
-		SaveCsvData.save();
+		SaveCsvData save = new SaveCsvData();
+		save.save();
 
 	}
 

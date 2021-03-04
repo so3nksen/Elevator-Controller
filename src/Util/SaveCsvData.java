@@ -4,11 +4,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
-import Model.Aufzug;
-import Model.AufzugList;
-import Model.Lastenaufzug;
-import Model.Personenaufzug;
-import Model.VIPAufzug;
+import Model.ElevatorList;
+import Model.Elevator;
+import Model.FreightElevator;
+import Model.PersonElevator;
+import Model.VipElevator;
 
 /**
  * Class saving elements of ElevatorList to specific .csv data on programm exit.
@@ -21,8 +21,7 @@ public class SaveCsvData {
 	/**
 	 * init the saving process
 	 */
-	public static void save() {
-
+	public void save() {
 		savePersonElevators();
 		saveFreightElevators();
 		saveVipElevators();
@@ -31,37 +30,36 @@ public class SaveCsvData {
 	/**
 	 * Saves all person elevators in ElevatorList to personElevators.csv
 	 */
-	private static void savePersonElevators() {
+	private void savePersonElevators() {
 
 		StringBuilder sb = new StringBuilder();
 		sb.append("id;maxPersons;maxWeight;music;currentFloor" + System.lineSeparator());
-		for (Aufzug e : AufzugList.getList()) {
-			if (e instanceof Personenaufzug) {
+		for (Elevator e : ElevatorList.getList()) {
+			if (e instanceof PersonElevator) {
 				sb.append(e.getId() + ";");
-				sb.append(e.getPersonenzahl() + ";");
-				sb.append(e.getGesamtgewicht() + ";");
-				sb.append(((Personenaufzug) e).getAufzugsMelodie() + ";");
-				sb.append(e.getAktuellesStockwerk() + System.lineSeparator());
+				sb.append(e.getMaxPersons() + ";");
+				sb.append(e.getMaxWeight() + ";");
+				sb.append(((PersonElevator) e).getAufzugsMelodie() + ";");
+				sb.append(e.getCurrentFloor() + System.lineSeparator());
 			}
 		}
-
 		writeToFile(sb.toString().trim(), Props.ABSOLUTE_PATH + Props.PERSON_ELEVATOR);
 	}
 
 	/**
 	 * Saves all freight elevators in ElevatorList to freightElevators.csv
 	 */
-	private static void saveFreightElevators() {
+	private void saveFreightElevators() {
 
 		StringBuilder sb = new StringBuilder();
 		sb.append("id;maxPersons;maxWeight;squareMeters;currentFloor" + System.lineSeparator());
-		for (Aufzug e : AufzugList.getList()) {
-			if (e instanceof Lastenaufzug) {
+		for (Elevator e : ElevatorList.getList()) {
+			if (e instanceof FreightElevator) {
 				sb.append(e.getId() + ";");
-				sb.append(e.getPersonenzahl() + ";");
-				sb.append(e.getGesamtgewicht() + ";");
-				sb.append(((Lastenaufzug) e).getQuadratmeter() + ";");
-				sb.append(e.getAktuellesStockwerk() + System.lineSeparator());
+				sb.append(e.getMaxPersons() + ";");
+				sb.append(e.getMaxWeight() + ";");
+				sb.append(((FreightElevator) e).getSqaureMeters() + ";");
+				sb.append(e.getCurrentFloor() + System.lineSeparator());
 
 			}
 		}
@@ -71,24 +69,24 @@ public class SaveCsvData {
 	/**
 	 * Saves all vip elevators in ElevatorList to vipElevators.csv
 	 */
-	private static void saveVipElevators() {
+	private void saveVipElevators() {
 
 		StringBuilder sb = new StringBuilder();
 		sb.append("id;maxPersons;maxWeight;speed;currentFloor" + System.lineSeparator());
-		for (Aufzug e : AufzugList.getList()) {
-			if (e instanceof VIPAufzug) {
+		for (Elevator e : ElevatorList.getList()) {
+			if (e instanceof VipElevator) {
 				sb.append(e.getId() + ";");
-				sb.append(e.getPersonenzahl() + ";");
-				sb.append(e.getGesamtgewicht() + ";");
-				sb.append(((VIPAufzug) e).getMaxGeschwindigkeit() + ";");
-				sb.append(e.getAktuellesStockwerk() + System.lineSeparator());
+				sb.append(e.getMaxPersons() + ";");
+				sb.append(e.getMaxWeight() + ";");
+				sb.append(((VipElevator) e).getMaxSpeed() + ";");
+				sb.append(e.getCurrentFloor() + System.lineSeparator());
 
 			}
 		}
 		writeToFile(sb.toString().trim(), Props.ABSOLUTE_PATH + Props.VIP_ELEVATOR);
 	}
 
-	private static void writeToFile(String string, String path) {
+	private void writeToFile(String string, String path) {
 
 		try (PrintWriter writer = new PrintWriter(new File(path))) {
 

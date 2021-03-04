@@ -1,11 +1,11 @@
 package Util;
 
-import Model.Aufzug;
-import Model.AufzugList;
+import Model.Elevator;
+import Model.ElevatorList;
 import Model.ElevatorTypes;
-import Model.Lastenaufzug;
-import Model.Personenaufzug;
-import Model.VIPAufzug;
+import Model.FreightElevator;
+import Model.PersonElevator;
+import Model.VipElevator;
 
 /**
  * Util class to find closest elevator.
@@ -22,7 +22,7 @@ public class NearestFloor {
 	 * @param myFloor -> the position in building.
 	 * @return
 	 */
-	public static int serach(ElevatorTypes type, int myFloor) {
+	public int serach(ElevatorTypes type, int myFloor) {
 
 		int distanceBetween = 999999999;
 		int nearestElevatorInFloor = 0;
@@ -30,21 +30,21 @@ public class NearestFloor {
 		// check for the closest personElevator
 		if (type == ElevatorTypes.PERSON_SMALL || type == ElevatorTypes.PERSON_BIG) {
 
-			for (Aufzug aufzug : AufzugList.getList()) {
-				if (aufzug instanceof Personenaufzug) {
+			for (Elevator aufzug : ElevatorList.getList()) {
+				if (aufzug instanceof PersonElevator) {
 					if (type == ElevatorTypes.PERSON_BIG) {
-						if (aufzug.getPersonenzahl() > 15) {
-							int d = Math.abs(myFloor - aufzug.getAktuellesStockwerk());
+						if (aufzug.getMaxPersons() > 15) {
+							int d = Math.abs(myFloor - aufzug.getCurrentFloor());
 							if (d < distanceBetween) {
 								distanceBetween = d;
-								nearestElevatorInFloor = aufzug.getAktuellesStockwerk();
+								nearestElevatorInFloor = aufzug.getCurrentFloor();
 							}
 						}
 					} else {
-						int d = Math.abs(myFloor - aufzug.getAktuellesStockwerk());
+						int d = Math.abs(myFloor - aufzug.getCurrentFloor());
 						if (d < distanceBetween) {
 							distanceBetween = d;
-							nearestElevatorInFloor = aufzug.getAktuellesStockwerk();
+							nearestElevatorInFloor = aufzug.getCurrentFloor();
 						}
 					}
 				}
@@ -54,21 +54,21 @@ public class NearestFloor {
 		// check for the closest freightElevator
 		else if (type == ElevatorTypes.FREIGHT_SMALL || type == ElevatorTypes.FREIGHT_BIG) {
 
-			for (Aufzug aufzug : AufzugList.getList()) {
-				if (aufzug instanceof Lastenaufzug) {
+			for (Elevator aufzug : ElevatorList.getList()) {
+				if (aufzug instanceof FreightElevator) {
 					if (type == ElevatorTypes.FREIGHT_BIG) {
-						if (aufzug.getGesamtgewicht() > 5000) {
-							int d = Math.abs(myFloor - aufzug.getAktuellesStockwerk());
+						if (aufzug.getMaxWeight() > 5000) {
+							int d = Math.abs(myFloor - aufzug.getCurrentFloor());
 							if (d < distanceBetween) {
 								distanceBetween = d;
-								nearestElevatorInFloor = aufzug.getAktuellesStockwerk();
+								nearestElevatorInFloor = aufzug.getCurrentFloor();
 							}
 						}
 					} else {
-						int d = Math.abs(myFloor - aufzug.getAktuellesStockwerk());
+						int d = Math.abs(myFloor - aufzug.getCurrentFloor());
 						if (d < distanceBetween) {
 							distanceBetween = d;
-							nearestElevatorInFloor = aufzug.getAktuellesStockwerk();
+							nearestElevatorInFloor = aufzug.getCurrentFloor();
 						}
 					}
 				}
@@ -78,12 +78,12 @@ public class NearestFloor {
 		// check for closest vip elevator
 		else if (type == ElevatorTypes.VIP) {
 
-			for (Aufzug aufzug : AufzugList.getList()) {
-				if (aufzug instanceof VIPAufzug) {
-					int d = Math.abs(myFloor - aufzug.getAktuellesStockwerk());
+			for (Elevator aufzug : ElevatorList.getList()) {
+				if (aufzug instanceof VipElevator) {
+					int d = Math.abs(myFloor - aufzug.getCurrentFloor());
 					if (d < distanceBetween) {
 						distanceBetween = d;
-						nearestElevatorInFloor = aufzug.getAktuellesStockwerk();
+						nearestElevatorInFloor = aufzug.getCurrentFloor();
 					}
 				}
 			}

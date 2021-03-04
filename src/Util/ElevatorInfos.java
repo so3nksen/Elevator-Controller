@@ -1,10 +1,10 @@
 package Util;
 
-import Model.Aufzug;
-import Model.AufzugList;
-import Model.Lastenaufzug;
-import Model.Personenaufzug;
-import Model.VIPAufzug;
+import Model.Elevator;
+import Model.ElevatorList;
+import Model.FreightElevator;
+import Model.PersonElevator;
+import Model.VipElevator;
 
 /**
  * Util class to get Elevator infos.
@@ -20,27 +20,27 @@ public class ElevatorInfos {
 	 * @param id -> id of elevator
 	 * @return object of elevator
 	 */
-	public Aufzug getInfos(int id) {
+	public Elevator getInfos(int id) {
 
-		Aufzug elevator = null;
+		Elevator elevator = null;
 
-		for (Aufzug e : AufzugList.getList()) {
+		for (Elevator e : ElevatorList.getList()) {
 			if (e.getId() == id) {
 				elevator = e;
 
 				StringBuilder sb = new StringBuilder();
 				sb.append("###[ELEVATOR INFOS   (                    )] - ");
 				sb.append("ID: " + elevator.getId() + " | ");
-				sb.append("StockwerK: " + elevator.getAktuellesStockwerk() + " | ");
-				sb.append("Max Persoons: " + elevator.getPersonenzahl() + " | ");
-				sb.append("Max Weight: " + elevator.getGesamtgewicht() + " | ");
+				sb.append("StockwerK: " + elevator.getCurrentFloor() + " | ");
+				sb.append("Max Persoons: " + elevator.getMaxPersons() + " | ");
+				sb.append("Max Weight: " + elevator.getMaxWeight() + " | ");
 
-				if (e instanceof Personenaufzug) {
-					sb.append(("Music Playing: " + ((Personenaufzug) e).getAufzugsMelodie()));
-				} else if (e instanceof Lastenaufzug) {
-					sb.append(("Square Meters: " + ((Lastenaufzug) e).getQuadratmeter()));
-				} else if (e instanceof VIPAufzug) {
-					sb.append(("Max Speed: " + ((VIPAufzug) e).getMaxGeschwindigkeit()));
+				if (e instanceof PersonElevator) {
+					sb.append(("Music Playing: " + ((PersonElevator) e).getAufzugsMelodie()));
+				} else if (e instanceof FreightElevator) {
+					sb.append(("Square Meters: " + ((FreightElevator) e).getSqaureMeters()));
+				} else if (e instanceof VipElevator) {
+					sb.append(("Max Speed: " + ((VipElevator) e).getMaxSpeed()));
 				}
 
 				System.out.println(sb.toString());

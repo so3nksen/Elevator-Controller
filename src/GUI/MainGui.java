@@ -17,7 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
-import Model.Aufzug;
+import Model.Elevator;
 import Model.ElevatorTypes;
 import Util.RequestElevator;
 import farhstuehle.Aufzugfahrt;
@@ -128,8 +128,9 @@ public class MainGui {
 								.parseInt(JOptionPane.showInputDialog("Auf welchem Stockwerk startet der Aufzug?"));
 						int toFloor = Integer
 								.parseInt(JOptionPane.showInputDialog("Zu welchem Stockwerk fährt der Aufzug?"));
-						// FREIGHT OR PERSONS
-						RequestElevator.reuqest(fromFloor, toFloor, persons, 0, ElevatorTypes.PERSON, false);
+
+						RequestElevator req = new RequestElevator();
+						req.request(fromFloor, toFloor, persons, 0, ElevatorTypes.PERSON, false);
 					}
 				} else if (x == 1) {
 
@@ -145,8 +146,8 @@ public class MainGui {
 						int toFloor = Integer
 								.parseInt(JOptionPane.showInputDialog("Zu welchem Stockwerk f�hrt der Aufzug?"));
 
-						// FREIGHT OR PERSONS
-						RequestElevator.reuqest(fromFloor, toFloor, 0, weight, ElevatorTypes.FREIGHT, false);
+						RequestElevator req = new RequestElevator();
+						req.request(fromFloor, toFloor, 0, weight, ElevatorTypes.FREIGHT, false);
 
 					}
 				}
@@ -176,8 +177,9 @@ public class MainGui {
 									.parseInt(JOptionPane.showInputDialog("Auf welchem Stockwerk startet der Aufzug?"));
 							int toFloor = Integer
 									.parseInt(JOptionPane.showInputDialog("Zu welchem Stockwerk fährt der Aufzug?"));
-							// FREIGHT OR PERSONS
-							RequestElevator.reuqest(fromFloor, toFloor, persons, 0, ElevatorTypes.VIP, true);
+
+							RequestElevator req = new RequestElevator();
+							req.request(fromFloor, toFloor, persons, 0, ElevatorTypes.VIP, true);
 						}
 					} else if (x == 1) {
 						int weight = Integer.parseInt(JOptionPane
@@ -191,8 +193,8 @@ public class MainGui {
 							int toFloor = Integer
 									.parseInt(JOptionPane.showInputDialog("Zu welchem Stockwerk f�hrt der Aufzug?"));
 
-							// FREIGHT OR PERSONS
-							RequestElevator.reuqest(fromFloor, toFloor, 0, weight, ElevatorTypes.FREIGHT, true);
+							RequestElevator req = new RequestElevator();
+							req.request(fromFloor, toFloor, 0, weight, ElevatorTypes.FREIGHT, true);
 
 						}
 					}
@@ -237,13 +239,13 @@ public class MainGui {
 							String newPersAnz = JOptionPane
 									.showInputDialog("Wie viele Personen k�nnen kleine Personenaufz�ge bef�rdern?");
 							for (int i = 0; i < 20; i++) {
-								setNewPersonenAnzahl((Aufzug) list.get(i), newPersAnz);
+								setNewPersonenAnzahl((Elevator) list.get(i), newPersAnz);
 							}
 						} else if (z == 1) {
 							String newMaxGew = JOptionPane
 									.showInputDialog("Wie viel Gewicht k�nnen kleine Personenaufz�ge bef�rdern?");
 							for (int i = 0; i < 20; i++) {
-								setNewMaxGewicht((Aufzug) list.get(i), newMaxGew);
+								setNewMaxGewicht((Elevator) list.get(i), newMaxGew);
 							}
 						} else if (z == 2) {
 							int musik = JOptionPane.showConfirmDialog(null, "Haben kleine Personenaufz�ge Musik?",
@@ -268,13 +270,13 @@ public class MainGui {
 							String newPersAnz = JOptionPane
 									.showInputDialog("Wie viele Personen k�nnen gro�e Personenaufz�ge bef�rdern?");
 							for (int i = 20; i < 30; i++) {
-								setNewPersonenAnzahl((Aufzug) list.get(i), newPersAnz);
+								setNewPersonenAnzahl((Elevator) list.get(i), newPersAnz);
 							}
 						} else if (z == 1) {
 							String newMaxGew = JOptionPane
 									.showInputDialog("Wie viel Gewicht k�nnen gro�e Personenaufz�ge bef�rdern?");
 							for (int i = 20; i < 30; i++) {
-								setNewMaxGewicht((Aufzug) list.get(i), newMaxGew);
+								setNewMaxGewicht((Elevator) list.get(i), newMaxGew);
 							}
 						} else if (z == 2) {
 							int musik = JOptionPane.showConfirmDialog(null, "Haben gro�e Personenaufz�ge Musik?",
@@ -305,13 +307,13 @@ public class MainGui {
 							String newPersAnz = JOptionPane
 									.showInputDialog("Wie viele Personen k�nnen kleine Lastenaufz�ge bef�rdern?");
 							for (int i = 30; i < 40; i++) {
-								setNewPersonenAnzahl((Aufzug) list.get(i), newPersAnz);
+								setNewPersonenAnzahl((Elevator) list.get(i), newPersAnz);
 							}
 						} else if (z == 1) {
 							String newMaxGew = JOptionPane
 									.showInputDialog("Wie viel Gewicht k�nnen kleine Lastenaufz�ge bef�rdern?");
 							for (int i = 30; i < 40; i++) {
-								setNewMaxGewicht((Aufzug) list.get(i), newMaxGew);
+								setNewMaxGewicht((Elevator) list.get(i), newMaxGew);
 							}
 						} else if (z == 2) {
 							String newSize = JOptionPane.showInputDialog("Wie gro� (in qm) sind kleine Lastenaufz�ge?");
@@ -331,13 +333,13 @@ public class MainGui {
 							String newPersAnz = JOptionPane
 									.showInputDialog("Wie viele Personen k�nnen gro�e Lastenaufz�ge bef�rdern?");
 							for (int i = 40; i < 45; i++) {
-								setNewPersonenAnzahl((Aufzug) list.get(i), newPersAnz);
+								setNewPersonenAnzahl((Elevator) list.get(i), newPersAnz);
 							}
 						} else if (z == 1) {
 							String newMaxGew = JOptionPane
 									.showInputDialog("Wie viel Gewicht k�nnen gro�e Lastenaufz�ge bef�rdern?");
 							for (int i = 40; i < 45; i++) {
-								setNewMaxGewicht((Aufzug) list.get(i), newMaxGew);
+								setNewMaxGewicht((Elevator) list.get(i), newMaxGew);
 							}
 						} else if (z == 2) {
 							String newSize = JOptionPane.showInputDialog("Wie gro� (in qm) sind gro�e Lastenaufz�ge?");
@@ -360,13 +362,13 @@ public class MainGui {
 						String newPersAnz = JOptionPane
 								.showInputDialog("Wie viele Personen k�nnen VIP-Aufz�ge bef�rdern?");
 						for (int i = 45; i < 50; i++) {
-							setNewPersonenAnzahl((Aufzug) list.get(i), newPersAnz);
+							setNewPersonenAnzahl((Elevator) list.get(i), newPersAnz);
 						}
 					} else if (z == 1) {
 						String newMaxGew = JOptionPane
 								.showInputDialog("Wie viel Gewicht k�nnen VIP-Aufz�ge bef�rdern?");
 						for (int i = 45; i < 50; i++) {
-							setNewMaxGewicht((Aufzug) list.get(i), newMaxGew);
+							setNewMaxGewicht((Elevator) list.get(i), newMaxGew);
 						}
 					} else if (z == 2) {
 						String newSpeed = JOptionPane.showInputDialog("Wie gro� (in qm) sind kleine Lastenaufz�ge?");
@@ -389,7 +391,7 @@ public class MainGui {
 
 	}
 
-	private void setNewPersonenAnzahl(Aufzug aufzug, String newValue) {
+	private void setNewPersonenAnzahl(Elevator aufzug, String newValue) {
 		try {
 			int newAnzahl = Integer.parseInt(newValue);
 			if (newAnzahl < 31) {
@@ -402,7 +404,7 @@ public class MainGui {
 		}
 	}
 
-	private void setNewMaxGewicht(Aufzug aufzug, String newValue) {
+	private void setNewMaxGewicht(Elevator aufzug, String newValue) {
 		try {
 			int newGewicht = Integer.parseInt(newValue);
 			if (newGewicht < 10000) {
@@ -514,7 +516,7 @@ public class MainGui {
 			endPos = 50;
 		}
 		for (int i = startPos; i < endPos; i++) {
-			int aufzugStockwerk = ((Aufzug) list.get(i)).getAktuellesStockwerk();
+			int aufzugStockwerk = ((Elevator) list.get(i)).getCurrentFloor();
 			if (i == 0) {
 				diff = Math.abs(aufzugStockwerk - aktStock);
 			}
@@ -541,7 +543,7 @@ public class MainGui {
 		if (x == 0) {
 			for (int i = 0; i < list.size(); i++) {
 				message = message + list.get(i).getClass().getSimpleName() + " an Pos " + i + " Stockwerk : "
-						+ ((Aufzug) list.get(i)).getAktuellesStockwerk() + "\n";
+						+ ((Elevator) list.get(i)).getCurrentFloor() + "\n";
 				// System.out.println(list.get(i).getClass().getSimpleName() + " an Pos " + i +
 				// " Stockwerk : " + ((Aufzug) list.get(i)).getAktuellesStockwerk());
 			}
@@ -553,7 +555,7 @@ public class MainGui {
 			if (y == 0) {
 				for (int i = 0; i < 30; i++) {
 					message = message + list.get(i).getClass().getSimpleName() + " an Pos " + i + " Stockwerk : "
-							+ ((Aufzug) list.get(i)).getAktuellesStockwerk() + "\n";
+							+ ((Elevator) list.get(i)).getCurrentFloor() + "\n";
 				}
 			} else if (y == 1) {
 				String[] filter2 = { "Mit Musik", "Ohne Musik" };
@@ -563,7 +565,7 @@ public class MainGui {
 					for (int i = 0; i < 30; i++) {
 						if (((PersonenAufzug) list.get(i)).getMelodie()) {
 							message = message + list.get(i).getClass().getSimpleName() + " an Pos " + i
-									+ " Stockwerk : " + ((Aufzug) list.get(i)).getAktuellesStockwerk() + " Musik "
+									+ " Stockwerk : " + ((Elevator) list.get(i)).getCurrentFloor() + " Musik "
 									+ ((PersonenAufzug) list.get(i)).getMelodie() + "\n";
 						}
 					}
@@ -571,7 +573,7 @@ public class MainGui {
 					for (int i = 0; i < 30; i++) {
 						if (!((PersonenAufzug) list.get(i)).getMelodie()) {
 							message = message + list.get(i).getClass().getSimpleName() + " an Pos " + i
-									+ " Stockwerk : " + ((Aufzug) list.get(i)).getAktuellesStockwerk() + " Musik "
+									+ " Stockwerk : " + ((Elevator) list.get(i)).getCurrentFloor() + " Musik "
 									+ ((PersonenAufzug) list.get(i)).getMelodie() + "\n";
 						}
 					}
@@ -585,7 +587,7 @@ public class MainGui {
 			if (y == 0) {
 				for (int i = 30; i < 45; i++) {
 					message = message + list.get(i).getClass().getSimpleName() + " an Pos " + i + " Stockwerk : "
-							+ ((Aufzug) list.get(i)).getAktuellesStockwerk() + " Quadratmeter: "
+							+ ((Elevator) list.get(i)).getCurrentFloor() + " Quadratmeter: "
 							+ ((LastenAufzug) list.get(i)).getQm() + "\n";
 				}
 			} else if (y == 1) {
@@ -595,7 +597,7 @@ public class MainGui {
 					for (int i = 30; i < 45; i++) {
 						if (qmEingabe == ((LastenAufzug) list.get(i)).getQm()) {
 							message = message + list.get(i).getClass().getSimpleName() + " an Pos " + i
-									+ " Stockwerk : " + ((Aufzug) list.get(i)).getAktuellesStockwerk()
+									+ " Stockwerk : " + ((Elevator) list.get(i)).getCurrentFloor()
 									+ " Quadratmeter: " + ((LastenAufzug) list.get(i)).getQm() + "\n";
 						}
 					}
@@ -613,7 +615,7 @@ public class MainGui {
 			if (y == 0) {
 				for (int i = 45; i < 50; i++) {
 					message = message + list.get(i).getClass().getSimpleName() + " an Pos " + i + " Stockwerk : "
-							+ ((Aufzug) list.get(i)).getAktuellesStockwerk() + " H�chstgeschwindigkeit: "
+							+ ((Elevator) list.get(i)).getCurrentFloor() + " H�chstgeschwindigkeit: "
 							+ ((VipAufzug) list.get(i)).getMaxKmh() + "\n";
 				}
 			} else if (y == 1) {
@@ -623,7 +625,7 @@ public class MainGui {
 					for (int i = 45; i < 50; i++) {
 						if (maxKmhEingabe == ((VipAufzug) list.get(i)).getMaxKmh()) {
 							message = message + list.get(i).getClass().getSimpleName() + " an Pos " + i
-									+ " Stockwerk : " + ((Aufzug) list.get(i)).getAktuellesStockwerk()
+									+ " Stockwerk : " + ((Elevator) list.get(i)).getCurrentFloor()
 									+ " H�chstgeschwindigkeit: " + ((VipAufzug) list.get(i)).getMaxKmh() + "\n";
 						}
 					}

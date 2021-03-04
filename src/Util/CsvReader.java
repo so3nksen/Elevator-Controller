@@ -4,10 +4,10 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-import Model.AufzugList;
-import Model.Lastenaufzug;
-import Model.Personenaufzug;
-import Model.VIPAufzug;
+import Model.ElevatorList;
+import Model.FreightElevator;
+import Model.PersonElevator;
+import Model.VipElevator;
 
 /**
  * Util class managing reading all .csv data on programm start
@@ -23,7 +23,6 @@ public class CsvReader {
 	public void read() {
 		// console status
 		System.out.println("Reading csv...");
-
 		// read data for every .csv file
 		readPersonElevators();
 		readFreightElevators();
@@ -45,16 +44,16 @@ public class CsvReader {
 
 				if (i != 0) {
 
-					Personenaufzug p = new Personenaufzug();
+					PersonElevator p = new PersonElevator();
 					String[] splitted = line.split(";");
 
 					p.setId(Integer.parseInt(splitted[0]));
-					p.setPersonenzahl(Integer.parseInt(splitted[1]));
-					p.setGesamtgewicht(Integer.parseInt(splitted[2]));
+					p.setMaxPersons(Integer.parseInt(splitted[1]));
+					p.setMaxWeight(Integer.parseInt(splitted[2]));
 					p.setAufzugsMelodie(splitted[3]);
-					p.setAktuellesStockwerk(Integer.parseInt(splitted[4]));
+					p.setCurrentFloor(Integer.parseInt(splitted[4]));
 
-					AufzugList.add(p);
+					ElevatorList.add(p);
 				}
 				i++;
 			}
@@ -78,16 +77,16 @@ public class CsvReader {
 
 				if (i != 0) {
 
-					Lastenaufzug f = new Lastenaufzug();
+					FreightElevator f = new FreightElevator();
 					String[] splitted = line.split(";");
 
 					f.setId(Integer.parseInt(splitted[0]));
-					f.setPersonenzahl(Integer.parseInt(splitted[1]));
-					f.setGesamtgewicht(Integer.parseInt(splitted[2]));
-					f.setQuadratmeter(Integer.parseInt(splitted[3]));
-					f.setAktuellesStockwerk(Integer.parseInt(splitted[4]));
+					f.setMaxPersons(Integer.parseInt(splitted[1]));
+					f.setMaxWeight(Integer.parseInt(splitted[2]));
+					f.setSquareMeters(Integer.parseInt(splitted[3]));
+					f.setCurrentFloor(Integer.parseInt(splitted[4]));
 
-					AufzugList.add(f);
+					ElevatorList.add(f);
 				}
 				i++;
 			}
@@ -111,16 +110,16 @@ public class CsvReader {
 
 				if (i != 0) {
 
-					VIPAufzug v = new VIPAufzug();
+					VipElevator v = new VipElevator();
 					String[] splitted = line.split(";");
 
 					v.setId(Integer.parseInt(splitted[0]));
-					v.setPersonenzahl(Integer.parseInt(splitted[1]));
-					v.setGesamtgewicht(Integer.parseInt(splitted[2]));
-					v.setMaxGeschwindigkeit(Integer.parseInt(splitted[3]));
-					v.setAktuellesStockwerk(Integer.parseInt(splitted[4]));
+					v.setMaxPersons(Integer.parseInt(splitted[1]));
+					v.setMaxWeight(Integer.parseInt(splitted[2]));
+					v.setMaxSpeed(Integer.parseInt(splitted[3]));
+					v.setCurrentFloor(Integer.parseInt(splitted[4]));
 
-					AufzugList.add(v);
+					ElevatorList.add(v);
 				}
 				i++;
 			}
