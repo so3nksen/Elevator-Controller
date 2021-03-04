@@ -8,10 +8,8 @@ package Model;
  */
 public class FreightElevator extends Elevator {
 
-	// squaremeters of elevator
 	private int sqaureMeters;
 
-	// Getter u Setter
 	public int getSqaureMeters() {
 		return sqaureMeters;
 	}

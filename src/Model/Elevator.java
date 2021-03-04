@@ -41,7 +41,7 @@ public class Elevator {
 		this.currentFloor = currentFloor;
 	}
 
-	private void move() {
+	private void move(int fromFloor, int toFloor) {
 
 	}
 

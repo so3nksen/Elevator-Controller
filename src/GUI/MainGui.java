@@ -93,7 +93,6 @@ public class MainGui {
 						JOptionPane.OK_OPTION, 0, new ImageIcon("")) != 0) {
 					return;
 				}
-
 				System.exit(-1);
 			}
 
@@ -597,8 +596,8 @@ public class MainGui {
 					for (int i = 30; i < 45; i++) {
 						if (qmEingabe == ((LastenAufzug) list.get(i)).getQm()) {
 							message = message + list.get(i).getClass().getSimpleName() + " an Pos " + i
-									+ " Stockwerk : " + ((Elevator) list.get(i)).getCurrentFloor()
-									+ " Quadratmeter: " + ((LastenAufzug) list.get(i)).getQm() + "\n";
+									+ " Stockwerk : " + ((Elevator) list.get(i)).getCurrentFloor() + " Quadratmeter: "
+									+ ((LastenAufzug) list.get(i)).getQm() + "\n";
 						}
 					}
 				} catch (Exception e) {

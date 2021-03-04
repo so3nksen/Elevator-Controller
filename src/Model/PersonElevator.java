@@ -12,11 +12,11 @@ public class PersonElevator extends Elevator {
 	private String musicPlaying;
 
 	// Getter u Setter
-	public String getAufzugsMelodie() {
+	public String getMusicPlaying() {
 		return musicPlaying;
 	}
 
-	public void setAufzugsMelodie(String aufzugsMelodie) {
-		this.musicPlaying = aufzugsMelodie;
+	public void setMusicPlaying(String musicPlaying) {
+		this.musicPlaying = musicPlaying;
 	}
 }

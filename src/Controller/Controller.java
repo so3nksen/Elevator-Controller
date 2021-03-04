@@ -2,7 +2,7 @@ package Controller;
 
 import java.io.File;
 
-import GUI.MainGui;
+import GUI.SidebarGUI;
 import Model.Elevator;
 import Model.ElevatorTypes;
 import Util.CsvReader;
@@ -26,8 +26,8 @@ public class Controller {
 		Props.ABSOLUTE_PATH = new File("").getAbsolutePath();
 
 		// start gui
-		MainGui gui = new MainGui();
-		gui.init();
+		SidebarGUI gui = new SidebarGUI();
+		gui.startUserInterface();
 
 		// read .csv on programm start
 		CsvReader csv = new CsvReader();

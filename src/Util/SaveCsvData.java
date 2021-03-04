@@ -4,8 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
-import Model.ElevatorList;
 import Model.Elevator;
+import Model.ElevatorList;
 import Model.FreightElevator;
 import Model.PersonElevator;
 import Model.VipElevator;
@@ -25,6 +25,7 @@ public class SaveCsvData {
 		savePersonElevators();
 		saveFreightElevators();
 		saveVipElevators();
+		System.out.println("IST-Daten erfolgreich in .csv gespeichert.");
 	}
 
 	/**
@@ -39,7 +40,7 @@ public class SaveCsvData {
 				sb.append(e.getId() + ";");
 				sb.append(e.getMaxPersons() + ";");
 				sb.append(e.getMaxWeight() + ";");
-				sb.append(((PersonElevator) e).getAufzugsMelodie() + ";");
+				sb.append(((PersonElevator) e).getMusicPlaying() + ";");
 				sb.append(e.getCurrentFloor() + System.lineSeparator());
 			}
 		}

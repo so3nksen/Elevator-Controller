@@ -36,7 +36,7 @@ public class ElevatorInfos {
 				sb.append("Max Weight: " + elevator.getMaxWeight() + " | ");
 
 				if (e instanceof PersonElevator) {
-					sb.append(("Music Playing: " + ((PersonElevator) e).getAufzugsMelodie()));
+					sb.append(("Music Playing: " + ((PersonElevator) e).getMusicPlaying()));
 				} else if (e instanceof FreightElevator) {
 					sb.append(("Square Meters: " + ((FreightElevator) e).getSqaureMeters()));
 				} else if (e instanceof VipElevator) {

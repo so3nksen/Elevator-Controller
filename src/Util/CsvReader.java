@@ -50,7 +50,7 @@ public class CsvReader {
 					p.setId(Integer.parseInt(splitted[0]));
 					p.setMaxPersons(Integer.parseInt(splitted[1]));
 					p.setMaxWeight(Integer.parseInt(splitted[2]));
-					p.setAufzugsMelodie(splitted[3]);
+					p.setMusicPlaying(splitted[3]);
 					p.setCurrentFloor(Integer.parseInt(splitted[4]));
 
 					ElevatorList.add(p);
