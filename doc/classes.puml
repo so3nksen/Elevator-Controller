@@ -80,8 +80,49 @@ VipAufzug()
 }
 
 package "Gui"#DDDDDD{
-class Gui
-class GuiListener
+class Gui {
+__private__
+build()
+makePersonsOrGoodsVisible()
+__public__
+start()
+enterCarriageType()
+}
+class GuiListener {
+__public__
+double actionPerformed()
+}
+Gui -- GuiListener
+SidebarGUI -- MenuState
+class MainGui
+class SidebarGUI {
+__private__
+enum MenuState
+Jpanel root
+Jpanel contentPanel
+__
+JFrame createFrame()
+Jpanel createSideBar()
+__public__
+startUserInterface()
+actionPerformed(ActionEvent ae)
+}
+class MenuState
+class ElevatorInfoPanel {
+__public__
+..Getter..
+Jpanel get()
+}
+class ElevatorRequestPanel {
+__public__
+..Getter..
+Jpanel get()
+}
+class ElevatorStatsPanel {
+__public__
+..Getter..
+Jpanel get()
+}
 }
 
 package "Model"#DDDDDD{
@@ -117,7 +158,7 @@ enum ElevatorTypes {
 PERSON_SMALL, PERSON_BIG, FREIGHT_SMALL, FREIGHT_BIG, VIP, FREIGHT, PERSON
 
 }
-class Lastenaufzug {
+class Lastenaufzug<extends Aufzug1> {
 __private__
 int quadratmeter
 boolean kleinOderGross
@@ -130,7 +171,7 @@ __public__
 #setQuadratmeter()
 #setKleinOderGross()
 }
-class Personenaufzug {
+class Personenaufzug<extends Aufzug1> {
 __private__
 String aufzugsMelodie
 boolean kleinOderGross
@@ -144,7 +185,7 @@ __public__
 #setAufzugsMelodie()
 #setRaumGroesse()
 }
-class VIPAufzug {
+class VIPAufzug<extends Aufzug1> {
 __private__
 String passwort
 int maxGeschwindigkeit
@@ -208,16 +249,32 @@ search()
 }
 
 package "CSV Tabellen" <<Database>> #3CB371{
-circle freightElevators
-circle personElevators
-circle statistics
-circle vipElevators
+class "Lastenaufzug Tabelle" <<(T,#FF7700) freightElevators.csv >>
+class "Personenaufzug Tabelle" <<(T,#FF7700) personElevators.csv>>
+class "Statistik Tabelle" <<(T,#FF7700) statistics.csv>>
+class "Vip Aufzug Tabelle" <<(T,#FF7700) vipElevators.csv>>
 }
 }
+'Controller Verbindungen
+Controller ..> Props
+Controller ..> CsvReader
+Controller ..> MainGui
+Controller ..> NearestFloor
+Controller ..> MoveElevator
+Controller ..> ElevatorInfos
+Controller ..> Aufzug
+Controller ..> SaveCSVData
+
+Aufzugfahrt ..> ElevatorTypes
+'Model Verbindungen
+Aufzug1 --* Lastenaufzug
+Aufzug1 --*Personenaufzug
+Aufzug1 --* VIPAufzug
 
 "Util" ..|> "CSV Tabellen" : Save
 "CSV Tabellen" ..|> "Util" : Read, Search
 
+'fahrstuehle Verbindungen
 Aufzug --* LastenAufzug
 Aufzug --* PersonenAufzug
 Aufzug --* ViPAufzug
