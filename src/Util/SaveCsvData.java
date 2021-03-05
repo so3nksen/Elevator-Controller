@@ -35,7 +35,7 @@ public class SaveCsvData {
 
 		StringBuilder sb = new StringBuilder();
 		sb.append("id;maxPersons;maxWeight;music;currentFloor" + System.lineSeparator());
-		for (Elevator e : ElevatorList.getList()) {
+		for (Elevator e : ElevatorList.getElevatorList()) {
 			if (e instanceof PersonElevator) {
 				sb.append(e.getId() + ";");
 				sb.append(e.getMaxPersons() + ";");
@@ -54,7 +54,7 @@ public class SaveCsvData {
 
 		StringBuilder sb = new StringBuilder();
 		sb.append("id;maxPersons;maxWeight;squareMeters;currentFloor" + System.lineSeparator());
-		for (Elevator e : ElevatorList.getList()) {
+		for (Elevator e : ElevatorList.getElevatorList()) {
 			if (e instanceof FreightElevator) {
 				sb.append(e.getId() + ";");
 				sb.append(e.getMaxPersons() + ";");
@@ -74,7 +74,7 @@ public class SaveCsvData {
 
 		StringBuilder sb = new StringBuilder();
 		sb.append("id;maxPersons;maxWeight;speed;currentFloor" + System.lineSeparator());
-		for (Elevator e : ElevatorList.getList()) {
+		for (Elevator e : ElevatorList.getElevatorList()) {
 			if (e instanceof VipElevator) {
 				sb.append(e.getId() + ";");
 				sb.append(e.getMaxPersons() + ";");

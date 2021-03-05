@@ -24,7 +24,7 @@ public class ElevatorInfos {
 
 		Elevator elevator = null;
 
-		for (Elevator e : ElevatorList.getList()) {
+		for (Elevator e : ElevatorList.getElevatorList()) {
 			if (e.getId() == id) {
 				elevator = e;
 

@@ -19,7 +19,7 @@ public class MoveElevator {
 	 */
 	public void move(int id, int toFloor) {
 
-		for (Elevator e : ElevatorList.getList()) {
+		for (Elevator e : ElevatorList.getElevatorList()) {
 
 			if (e.getId() == id) {
 				if (e.getCurrentFloor() != toFloor) {

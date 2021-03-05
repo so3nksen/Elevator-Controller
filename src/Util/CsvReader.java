@@ -5,6 +5,8 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import Model.ElevatorList;
+import Model.ElevatorStatistic;
+import Model.ElevatorTypes;
 import Model.FreightElevator;
 import Model.PersonElevator;
 import Model.VipElevator;
@@ -27,7 +29,44 @@ public class CsvReader {
 		readPersonElevators();
 		readFreightElevators();
 		readVIPElevators();
+		readStats();
 
+	}
+
+	/**
+	 * Reads statistics from statistics.csv
+	 */
+	private void readStats() {
+		try (FileReader reader = new FileReader(Props.ABSOLUTE_PATH + Props.STATISTICS);
+				BufferedReader br = new BufferedReader(reader)) {
+
+			int i = 0;
+			String line;
+			while ((line = br.readLine()) != null) {
+
+				if (i != 0) {
+
+					ElevatorStatistic es = new ElevatorStatistic();
+					String[] splitted = line.split(";");
+
+					System.out.println(splitted[0]);
+
+					if (splitted[0].equals("person")) {
+						es.setType(ElevatorTypes.PERSON);
+					} else if (splitted[0].equals("freight")) {
+						es.setType(ElevatorTypes.FREIGHT);
+					} else if (splitted[0].equals("vip")) {
+						es.setType(ElevatorTypes.VIP);
+					}
+					es.setTotalPersonsOrWeight(Integer.parseInt(splitted[1]));
+					es.setTotalFloors(Integer.parseInt(splitted[2]));
+					ElevatorList.addToStatistikList(es);
+				}
+				i++;
+			}
+		} catch (IOException e) {
+			System.err.format("IOException: %s%n", e);
+		}
 	}
 
 	/**
@@ -53,7 +92,7 @@ public class CsvReader {
 					p.setMusicPlaying(splitted[3]);
 					p.setCurrentFloor(Integer.parseInt(splitted[4]));
 
-					ElevatorList.add(p);
+					ElevatorList.addToElevatorList(p);
 				}
 				i++;
 			}
@@ -86,7 +125,7 @@ public class CsvReader {
 					f.setSquareMeters(Integer.parseInt(splitted[3]));
 					f.setCurrentFloor(Integer.parseInt(splitted[4]));
 
-					ElevatorList.add(f);
+					ElevatorList.addToElevatorList(f);
 				}
 				i++;
 			}
@@ -119,7 +158,7 @@ public class CsvReader {
 					v.setMaxSpeed(Integer.parseInt(splitted[3]));
 					v.setCurrentFloor(Integer.parseInt(splitted[4]));
 
-					ElevatorList.add(v);
+					ElevatorList.addToElevatorList(v);
 				}
 				i++;
 			}

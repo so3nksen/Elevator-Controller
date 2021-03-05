@@ -20,12 +20,19 @@ public class Props {
 	/* Path to vipElevators.csv */
 	public static final String VIP_ELEVATOR = "/src/vipElevators.csv";
 
+	/* Path to statistics.csv */
+	public static final String STATISTICS = "/src/statistics.csv";
+
+	/* Path to stats icon */
 	public static final String STATS_ICON = "/src/statsIcon.png";
 
+	/* Path to request icon */
 	public static final String REQUEST_ICON = "/src/requestIcon.png";
 
+	/* Path to exit icon */
 	public static final String EXIT_ICON = "/src/exitIcon.png";
 
+	/* Path to indo icon */
 	public static final String INFO_ICON = "/src/infoIcon.png";
 
 }

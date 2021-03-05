@@ -1,6 +1,4 @@
-type;totalWeight;totalPersons;totalFloors
-personSmall;0;0;0
-personBig;0;0;0
-freightSmall;0;0;0
-freightBig;0;0;0
-vip;0;0;0
+type;totalValue;totalFloors
+person;0;100
+freight;0;200
+vip;0;300

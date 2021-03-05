@@ -118,7 +118,7 @@ public class SidebarGUI implements ActionListener {
 		//
 		// add sidebar panel
 		//
-		c.weightx = 0.05;
+		c.weightx = 0.2;
 		c.weighty = 1;
 		root.add(createSideBar(), c);
 
@@ -127,7 +127,7 @@ public class SidebarGUI implements ActionListener {
 		//
 		contentPanel = new JPanel(new GridBagLayout());
 		c.gridx = 1;
-		c.weightx = 0.9;
+		c.weightx = 0.8;
 		c.weighty = 1;
 		contentPanel.setBackground(Color.BLUE);
 		root.add(contentPanel, c);

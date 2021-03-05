@@ -1,9 +1,11 @@
 package GUI;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -34,6 +36,7 @@ public class ElevatorInfoPanel {
 	public JPanel get() {
 
 		JPanel jp = new JPanel(new GridBagLayout());
+		jp.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
 		// initiate grid
 		GridBagConstraints c = new GridBagConstraints();
 		c.weightx = 1;
@@ -41,15 +44,37 @@ public class ElevatorInfoPanel {
 		c.fill = GridBagConstraints.BOTH;
 		jp.setBackground(Color.WHITE);
 
-		JLabel l = new JLabel("Aufzugsinformationen");
+		JLabel headline = new JLabel("Aufzugsinformationen");
+		headline.setFont(new Font("Dosis", Font.BOLD, 36));
 		c.weightx = 1;
 		c.weighty = 0.1;
 		c.gridx = 0;
 		c.gridy = 0;
-		jp.add(l, c);
+		c.gridwidth = 5;
+		jp.add(headline, c);
 
-		DefaultTableModel tableModel = new DefaultTableModel();
+		JLabel subHead = new JLabel("In diesem Bereich werden alle im System hinterlegten Aufzugsattribute angezeigt.");
+		subHead.setFont(new Font("Dosis", Font.PLAIN, 18));
+		subHead.setBorder(BorderFactory.createEmptyBorder(-10, 0, 0, 0));
+		c.weightx = 1;
+		c.weighty = 0.05;
+		c.gridx = 0;
+		c.gridy = 1;
+		c.gridwidth = 5;
+		jp.add(subHead, c);
+
+		@SuppressWarnings("serial")
+		DefaultTableModel tableModel = new DefaultTableModel() {
+
+			boolean[] canEdit = new boolean[] { false, false, false, false, false, true };
+
+			public boolean isCellEditable(int rowIndex, int columnIndex) {
+				return canEdit[columnIndex];
+			}
+		};
+
 		JTable jt = new JTable(tableModel);
+		jt.setBackground(Color.LIGHT_GRAY);
 		tableModel.addColumn("Id");
 		tableModel.addColumn("Typ");
 		tableModel.addColumn("Aktuelles Stockwerk");
@@ -57,7 +82,7 @@ public class ElevatorInfoPanel {
 		tableModel.addColumn("Maximales Gewicht");
 		tableModel.addColumn("Sonderattribut");
 
-		for (Elevator e : ElevatorList.getList()) {
+		for (Elevator e : ElevatorList.getElevatorList()) {
 			Object[] rowData = null;
 			if (e instanceof PersonElevator) {
 				rowData = new Object[] { e.getId(), "Personenaufzug", e.getCurrentFloor(), e.getMaxPersons(), "-",
@@ -74,9 +99,9 @@ public class ElevatorInfoPanel {
 
 		JScrollPane jsp = new JScrollPane(jt);
 		c.weightx = 1;
-		c.weighty = 0.9;
+		c.weighty = 0.85;
 		c.gridx = 0;
-		c.gridy = 1;
+		c.gridy = 2;
 		jp.add(jsp, c);
 
 		return jp;
