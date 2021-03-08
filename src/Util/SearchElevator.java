@@ -15,7 +15,7 @@ public class SearchElevator {
 	 * @param isVipRequest
 	 * @return -> The elevator type that fits.
 	 */
-	public static ElevatorTypes search(int weight, int persons, int fromFloor, int toFloor, ElevatorTypes type,
+	public ElevatorTypes search(int weight, int persons, int fromFloor, int toFloor, ElevatorTypes type,
 			boolean isVipRequest) {
 
 		ElevatorTypes expected = null;

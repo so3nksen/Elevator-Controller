@@ -30,7 +30,8 @@ public class RequestElevator {
 				+ toFloor + " | Persons: " + persons + " | Weight: " + weight);
 
 		// get required elevator type
-		ElevatorTypes typeOfElevator = SearchElevator.search(weight, persons, fromFloor, toFloor, type, isVipRequested);
+		SearchElevator se = new SearchElevator();
+		ElevatorTypes typeOfElevator = se.search(weight, persons, fromFloor, toFloor, type, isVipRequested);
 
 		// get id of the closest elevator
 		NearestFloor nf = new NearestFloor();
@@ -39,6 +40,10 @@ public class RequestElevator {
 		// move elevator to floor required
 		MoveElevator m = new MoveElevator();
 		m.move(idOfClosestElevator, toFloor);
+
+		// write order values to statistics
+		WriteStats ws = new WriteStats();
+		ws.write(type, fromFloor, toFloor, persons);
 
 	}
 }

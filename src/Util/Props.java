@@ -35,4 +35,15 @@ public class Props {
 	/* Path to indo icon */
 	public static final String INFO_ICON = "/src/infoIcon.png";
 
+	/* Path to personelevator icon */
+	public static final String PERSON_ELEVATOR_ICON = "/src/personElevator.png";
+
+	/* Path to freightelevator icon */
+	public static final String FREIGHT_ELEVATOR_ICON = "/src/freightElevator.png";
+
+	/* Path to vipelevator icon */
+	public static final String VIP_ELEVATOR_ICON = "/src/vipElevator.png";
+
+	/* Path to check */
+	public static final String CHECK_ICON = "/src/check.png";
 }

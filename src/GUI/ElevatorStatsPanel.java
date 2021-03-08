@@ -64,7 +64,7 @@ public class ElevatorStatsPanel {
 		c.gridwidth = 1;
 		jp.add(createChildPanel(getInfosFromStats(ElevatorTypes.PERSON, KindoOfInfo.FLOORS),
 				getInfosFromStats(ElevatorTypes.PERSON, KindoOfInfo.PERSONS_WEIGHT), "Personen",
-				Props.ABSOLUTE_PATH + Props.REQUEST_ICON), c);
+				Props.ABSOLUTE_PATH + Props.PERSON_ELEVATOR_ICON), c);
 
 		JPanel spacerOne = new JPanel();
 		spacerOne.setBackground(Color.WHITE);
@@ -81,8 +81,8 @@ public class ElevatorStatsPanel {
 		c.gridy = 2;
 		c.gridwidth = 1;
 		jp.add(createChildPanel(getInfosFromStats(ElevatorTypes.FREIGHT, KindoOfInfo.FLOORS),
-				getInfosFromStats(ElevatorTypes.FREIGHT, KindoOfInfo.PERSONS_WEIGHT), "Fracht",
-				Props.ABSOLUTE_PATH + Props.REQUEST_ICON), c);
+				getInfosFromStats(ElevatorTypes.FREIGHT, KindoOfInfo.PERSONS_WEIGHT), "Fracht (kg)",
+				Props.ABSOLUTE_PATH + Props.FREIGHT_ELEVATOR_ICON), c);
 
 		JPanel spacerTwo = new JPanel();
 		spacerTwo.setBackground(Color.WHITE);
@@ -100,7 +100,7 @@ public class ElevatorStatsPanel {
 		c.gridwidth = 1;
 		jp.add(createChildPanel(getInfosFromStats(ElevatorTypes.VIP, KindoOfInfo.FLOORS),
 				getInfosFromStats(ElevatorTypes.VIP, KindoOfInfo.PERSONS_WEIGHT), "VIP's",
-				Props.ABSOLUTE_PATH + Props.REQUEST_ICON), c);
+				Props.ABSOLUTE_PATH + Props.VIP_ELEVATOR_ICON), c);
 
 		return jp;
 
@@ -118,7 +118,7 @@ public class ElevatorStatsPanel {
 		// try to load request image
 		try {
 			BufferedImage img = ImageIO.read(new File(pathToImage));
-			Image scaled = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+			Image scaled = img.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
 			ImageIcon icon = new ImageIcon(scaled);
 			JLabel imgLabel = new JLabel(icon);
 			imgLabel.setBackground(Color.WHITE);
@@ -133,8 +133,9 @@ public class ElevatorStatsPanel {
 		c.gridwidth = 1;
 		jp.add(iconPanel, c);
 
-		JLabel floorsTravelled = new JLabel("<html><div style='text-align: center;'>Stockwerke zurückgelegt: <br> <b>"
-				+ totalFloorsTravelled + "</b></div></html>)");
+		JLabel floorsTravelled = new JLabel(
+				"<html><div style='text-align: center;'><span style='font-size: 1.44em;'>Stockwerke zurückgelegt: </span><br> <b><span style='font-size: 5em;'>"
+						+ totalFloorsTravelled + "</span></b></div></html>)");
 		c.weightx = 1;
 		c.weighty = 0.33;
 		c.gridx = 0;
@@ -142,8 +143,10 @@ public class ElevatorStatsPanel {
 		c.gridwidth = 1;
 		jp.add(floorsTravelled, c);
 
-		JLabel totalPersonsWeight = new JLabel("<html><div style='text-align: center;'>" + prefix
-				+ " befördert: <br> <b>" + totalPersonsOrWeight + "</b></div></html>)");
+		JLabel totalPersonsWeight = new JLabel(
+				"<html><div style='text-align: center;'><span style='font-size: 1.44em;'>" + prefix
+						+ " befördert:</span><br> <b><span style='font-size: 4em;'>" + totalPersonsOrWeight
+						+ "</span></b></div></html>");
 		c.weightx = 1;
 		c.weighty = 0.33;
 		c.gridx = 0;
