@@ -21,7 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import Util.Props;
+import Properties.Props;
 import Util.SaveCsvData;
 
 public class SidebarGUI implements ActionListener {
@@ -39,6 +39,7 @@ public class SidebarGUI implements ActionListener {
 	 * Method to start gui.
 	 */
 	public void startUserInterface() {
+		System.out.println("[STATUS] Starting Graphical User Interface...");
 		JFrame jf = createFrame();
 		jf.setVisible(true);
 	}

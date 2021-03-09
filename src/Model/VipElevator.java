@@ -8,13 +8,13 @@ package Model;
  */
 public class VipElevator extends Elevator {
 
-	private int maxSpeed;
+	private String maxSpeed;
 
-	public int getMaxSpeed() {
+	public String getMaxSpeed() {
 		return maxSpeed;
 	}
 
-	public void setMaxSpeed(int maxSpeed) {
+	public void setMaxSpeed(String maxSpeed) {
 		this.maxSpeed = maxSpeed;
 	}
 }

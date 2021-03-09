@@ -10,6 +10,7 @@ import Model.ElevatorTypes;
 import Model.FreightElevator;
 import Model.PersonElevator;
 import Model.VipElevator;
+import Properties.Props;
 
 /**
  * Util class managing reading all .csv data on programm start
@@ -24,7 +25,7 @@ public class CsvReader {
 	 */
 	public void read() {
 		// console status
-		System.out.println("Reading csv...");
+		System.out.println("[STATUS] Reading CSV...");
 		// read data for every .csv file
 		readPersonElevators();
 		readFreightElevators();
@@ -49,14 +50,14 @@ public class CsvReader {
 					ElevatorStatistic es = new ElevatorStatistic();
 					String[] splitted = line.split(";");
 
-					System.out.println(splitted[0]);
-
 					if (splitted[0].equals("person")) {
 						es.setType(ElevatorTypes.PERSON);
 					} else if (splitted[0].equals("freight")) {
 						es.setType(ElevatorTypes.FREIGHT);
 					} else if (splitted[0].equals("vip")) {
 						es.setType(ElevatorTypes.VIP);
+					} else {
+						System.err.println("[ERROR] WRONG CSV DATA FORMAT ");
 					}
 					es.setTotalPersonsOrWeight(Integer.parseInt(splitted[1]));
 					es.setTotalFloors(Integer.parseInt(splitted[2]));
@@ -122,7 +123,7 @@ public class CsvReader {
 					f.setId(Integer.parseInt(splitted[0]));
 					f.setMaxPersons(Integer.parseInt(splitted[1]));
 					f.setMaxWeight(Integer.parseInt(splitted[2]));
-					f.setSquareMeters(Integer.parseInt(splitted[3]));
+					f.setSquareMeters(splitted[3]);
 					f.setCurrentFloor(Integer.parseInt(splitted[4]));
 
 					ElevatorList.addToElevatorList(f);
@@ -155,7 +156,7 @@ public class CsvReader {
 					v.setId(Integer.parseInt(splitted[0]));
 					v.setMaxPersons(Integer.parseInt(splitted[1]));
 					v.setMaxWeight(Integer.parseInt(splitted[2]));
-					v.setMaxSpeed(Integer.parseInt(splitted[3]));
+					v.setMaxSpeed(splitted[3]);
 					v.setCurrentFloor(Integer.parseInt(splitted[4]));
 
 					ElevatorList.addToElevatorList(v);

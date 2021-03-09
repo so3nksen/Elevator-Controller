@@ -1,12 +1,14 @@
 package GUI;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -17,6 +19,7 @@ import Model.ElevatorList;
 import Model.FreightElevator;
 import Model.PersonElevator;
 import Model.VipElevator;
+import Properties.Props;
 
 /**
  * ElevatorInfoPanel class.
@@ -44,24 +47,14 @@ public class ElevatorInfoPanel {
 		c.fill = GridBagConstraints.BOTH;
 		jp.setBackground(Color.WHITE);
 
-		JLabel headline = new JLabel("Aufzugsinformationen");
-		headline.setFont(new Font("Dosis", Font.BOLD, 36));
+		JLabel headline = new JLabel(
+				"<html><span style='font-size: 2.4em'><b>Aufzugsinformationen</b></span><br><span style='font-size: 1.56em'>Übersicht aller im System hinterlegten Aufzugsattribute.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></html>");
 		c.weightx = 1;
 		c.weighty = 0.1;
 		c.gridx = 0;
 		c.gridy = 0;
 		c.gridwidth = 5;
 		jp.add(headline, c);
-
-		JLabel subHead = new JLabel("In diesem Bereich werden alle im System hinterlegten Aufzugsattribute angezeigt.");
-		subHead.setFont(new Font("Dosis", Font.PLAIN, 18));
-		subHead.setBorder(BorderFactory.createEmptyBorder(-10, 0, 0, 0));
-		c.weightx = 1;
-		c.weighty = 0.05;
-		c.gridx = 0;
-		c.gridy = 1;
-		c.gridwidth = 5;
-		jp.add(subHead, c);
 
 		@SuppressWarnings("serial")
 		DefaultTableModel tableModel = new DefaultTableModel() {
@@ -70,6 +63,25 @@ public class ElevatorInfoPanel {
 
 			public boolean isCellEditable(int rowIndex, int columnIndex) {
 				return canEdit[columnIndex];
+			}
+
+			public void fireTableCellUpdated(int row, int column) {
+
+				for (Elevator e : ElevatorList.getElevatorList()) {
+					if (e.getId() == row + 1) {
+						if (e instanceof PersonElevator) {
+							((PersonElevator) e).setMusicPlaying(getValueAt(row, 5).toString());
+						} else if (e instanceof FreightElevator) {
+							((FreightElevator) e).setSquareMeters(getValueAt(row, 5).toString());
+						} else if (e instanceof VipElevator) {
+							((VipElevator) e).setMaxSpeed(getValueAt(row, 5).toString());
+						}
+						ImageIcon icon = new ImageIcon(Props.ABSOLUTE_PATH + Props.CHECK_ICON);
+						Image scaled = icon.getImage().getScaledInstance(42, 42, 0);
+						JOptionPane.showMessageDialog(null, "Attribut erfolgreich geändert!", "Änderung vorgenommen",
+								JOptionPane.OK_OPTION, new ImageIcon(scaled));
+					}
+				}
 			}
 		};
 
@@ -80,28 +92,29 @@ public class ElevatorInfoPanel {
 		tableModel.addColumn("Aktuelles Stockwerk");
 		tableModel.addColumn("Maximale Personen");
 		tableModel.addColumn("Maximales Gewicht");
-		tableModel.addColumn("Sonderattribut");
+		tableModel.addColumn("Sonderattribut (Musik, Quadratmeter, Geschwindigkeit)");
 
+		// create table object
 		for (Elevator e : ElevatorList.getElevatorList()) {
 			Object[] rowData = null;
 			if (e instanceof PersonElevator) {
 				rowData = new Object[] { e.getId(), "Personenaufzug", e.getCurrentFloor(), e.getMaxPersons(), "-",
-						"Musik: " + ((PersonElevator) e).getMusicPlaying() };
+						((PersonElevator) e).getMusicPlaying() };
 			} else if (e instanceof FreightElevator) {
 				rowData = new Object[] { e.getId(), "Frachtaufzug", e.getCurrentFloor(), "-", e.getMaxWeight(),
-						"Quadratmeter: " + ((FreightElevator) e).getSqaureMeters() };
+						((FreightElevator) e).getSqaureMeters() };
 			} else if (e instanceof VipElevator) {
 				rowData = new Object[] { e.getId(), "VIP-Aufzug", e.getCurrentFloor(), e.getMaxPersons(), "-",
-						"Geschwindigkeit: " + ((VipElevator) e).getMaxSpeed() };
+						((VipElevator) e).getMaxSpeed() };
 			}
 			tableModel.addRow(rowData);
 		}
 
 		JScrollPane jsp = new JScrollPane(jt);
 		c.weightx = 1;
-		c.weighty = 0.85;
+		c.weighty = 0.9;
 		c.gridx = 0;
-		c.gridy = 2;
+		c.gridy = 1;
 		jp.add(jsp, c);
 
 		return jp;

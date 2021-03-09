@@ -9,6 +9,7 @@ import Model.ElevatorList;
 import Model.FreightElevator;
 import Model.PersonElevator;
 import Model.VipElevator;
+import Properties.Props;
 
 /**
  * Class saving elements of ElevatorList to specific .csv data on programm exit.

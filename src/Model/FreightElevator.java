@@ -8,13 +8,13 @@ package Model;
  */
 public class FreightElevator extends Elevator {
 
-	private int sqaureMeters;
+	private String sqaureMeters;
 
-	public int getSqaureMeters() {
+	public String getSqaureMeters() {
 		return sqaureMeters;
 	}
 
-	public void setSquareMeters(int sqaureMeters) {
+	public void setSquareMeters(String sqaureMeters) {
 		this.sqaureMeters = sqaureMeters;
 	}
 }
