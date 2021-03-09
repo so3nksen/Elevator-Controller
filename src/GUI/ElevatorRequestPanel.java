@@ -481,7 +481,7 @@ public class ElevatorRequestPanel implements ActionListener {
 		jp.add(iconPanel, c);
 
 		JLabel label = new JLabel(
-				"<html><div style='text-align: center;'><span style='font-size: 2em'>Der Aufzug ist auf dem Weg zu Dir.<br> In Kürze wird die Steuerung resetted.");
+				"<html><div style='text-align: center;'><span style='font-size: 1.4em'><b>Ein Aufzug aus dem 3. Stock ist auf dem Weg zu Dir.</b><<br><br><span style='font-size: 1em'><i>In Kürze wird die Steuerung resetted.</i></span>");
 		c.weighty = 0.5;
 		c.gridx = 0;
 		c.gridy = 1;
@@ -492,7 +492,7 @@ public class ElevatorRequestPanel implements ActionListener {
 			public void run() {
 				resetPanels();
 			}
-		}, 5000);
+		}, 7000);
 
 		return jp;
 	}

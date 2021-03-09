@@ -46,9 +46,4 @@ public class Elevator {
 	public void setCurrentFloor(int currentFloor) {
 		this.currentFloor = currentFloor;
 	}
-
-	private void move(int fromFloor, int toFloor) {
-
-	}
-
 }

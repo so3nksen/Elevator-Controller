@@ -50,11 +50,11 @@ public class CsvReader {
 					ElevatorStatistic es = new ElevatorStatistic();
 					String[] splitted = line.split(";");
 
-					if (splitted[0].equals("person")) {
+					if (splitted[0].equals(ElevatorTypes.PERSON.name())) {
 						es.setType(ElevatorTypes.PERSON);
-					} else if (splitted[0].equals("freight")) {
+					} else if (splitted[0].equals(ElevatorTypes.FREIGHT.name())) {
 						es.setType(ElevatorTypes.FREIGHT);
-					} else if (splitted[0].equals("vip")) {
+					} else if (splitted[0].equals(ElevatorTypes.VIP.name())) {
 						es.setType(ElevatorTypes.VIP);
 					} else {
 						System.err.println("[ERROR] WRONG CSV DATA FORMAT ");

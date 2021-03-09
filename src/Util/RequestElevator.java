@@ -23,6 +23,13 @@ public class RequestElevator {
 	 */
 	public void request(int fromFloor, int toFloor, int persons, int weight, ElevatorTypes type) {
 
+		int statsValue;
+		if (persons != 0) {
+			statsValue = persons;
+		} else {
+			statsValue = weight;
+		}
+
 		System.out.println(
 				"########################################################################################################");
 		System.out.println("###[ELEVATOR REQUEST (    REQUEST DATA    )] - From Floor: " + fromFloor + " | To Floor: "
@@ -40,7 +47,7 @@ public class RequestElevator {
 
 		// write order values to statistics
 		WriteStats ws = new WriteStats();
-		ws.write(type, fromFloor, toFloor, persons);
+		ws.write(type, fromFloor, toFloor, statsValue);
 
 	}
 

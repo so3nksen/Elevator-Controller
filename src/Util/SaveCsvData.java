@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 
 import Model.Elevator;
 import Model.ElevatorList;
+import Model.ElevatorStatistic;
 import Model.FreightElevator;
 import Model.PersonElevator;
 import Model.VipElevator;
@@ -26,7 +27,8 @@ public class SaveCsvData {
 		savePersonElevators();
 		saveFreightElevators();
 		saveVipElevators();
-		System.out.println("IST-Daten erfolgreich in .csv gespeichert.");
+		saveStats();
+		System.out.println("[STATUS] CSV-Data saved on program exit...");
 	}
 
 	/**
@@ -86,6 +88,19 @@ public class SaveCsvData {
 			}
 		}
 		writeToFile(sb.toString().trim(), Props.ABSOLUTE_PATH + Props.VIP_ELEVATOR);
+	}
+
+	private void saveStats() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append("type;totalValue;totalFloors" + System.lineSeparator());
+		for (ElevatorStatistic es : ElevatorList.getStatisticList()) {
+			sb.append(es.getType() + ";");
+			sb.append(es.getTotalPersonsOrWeight());
+			sb.append(es.getTotalFloors() + System.lineSeparator());
+
+		}
+		writeToFile(sb.toString().trim(), Props.ABSOLUTE_PATH + Props.STATISTICS);
 	}
 
 	private void writeToFile(String string, String path) {
