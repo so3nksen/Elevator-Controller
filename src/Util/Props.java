@@ -46,4 +46,7 @@ public class Props {
 
 	/* Path to check */
 	public static final String CHECK_ICON = "/src/check.png";
+
+	/* Path to moving elevator gif */
+	public static final String MOVING_ELEVATOR = "/src/animatedElevator.gif";
 }

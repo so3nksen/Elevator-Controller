@@ -12,14 +12,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
+import javax.swing.*;
 
 import Model.ElevatorTypes;
 import Util.Props;
@@ -420,17 +413,33 @@ public class ElevatorRequestPanel implements ActionListener {
 		c.gridy = 0;
 		JPanel iconPanel = new JPanel(new GridBagLayout());
 		try {
+			// Show success button
 			BufferedImage img = ImageIO.read(new File(Props.ABSOLUTE_PATH + Props.CHECK_ICON));
 			Image scaled = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
 			ImageIcon icon = new ImageIcon(scaled);
 			JLabel imgLabel = new JLabel(icon);
 			imgLabel.setBackground(Color.WHITE);
 			iconPanel.add(imgLabel);
+
+			Icon gif = new ImageIcon(Props.ABSOLUTE_PATH + Props.MOVING_ELEVATOR);
+
+			//Image scaledGif = gif.getScaledInstance(350, 550, Image.SCALE_SMOOTH);
+
+			new java.util.Timer().schedule(new java.util.TimerTask() {
+				@Override
+				public void run() {
+					turnImgIntoGif(imgLabel, gif);
+				}
+			}, 2000);
+
+
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 		jp.add(iconPanel, c);
+
 
 		JLabel label = new JLabel(
 				"<html><div style='text-align: center;'><span style='font-size: 2em'>Der Aufzug ist auf dem Weg zu Dir.<br> In Kürze wird die Steuerung resetted.");
@@ -438,6 +447,43 @@ public class ElevatorRequestPanel implements ActionListener {
 		c.gridy = 1;
 
 		jp.add(label, c);
+		new java.util.Timer().schedule(new java.util.TimerTask() {
+			@Override
+			public void run() {
+				resetPanels();
+			}
+		}, 5000);
+
+
+
+		return jp;
+	}
+
+	private JPanel arrivingElevator() {
+		// show the moving elevator gif :-)
+		JPanel jp = new JPanel(new GridBagLayout());
+		// initiate grid
+		GridBagConstraints c = new GridBagConstraints();
+		c.weightx = 1;
+		c.weighty = 1;
+
+		c.gridx = 0;
+		c.gridy = 0;
+
+		JPanel iconPanel = new JPanel(new GridBagLayout());
+
+		try {
+			BufferedImage gif = ImageIO.read(new File(Props.ABSOLUTE_PATH + Props.MOVING_ELEVATOR));
+			ImageIcon gifIcon = new ImageIcon(gif);
+			JLabel imgLabel = new JLabel(gifIcon);
+			imgLabel.setBackground(Color.WHITE);
+			iconPanel.add(imgLabel);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		jp.add(iconPanel, c);
+		jp.setVisible(true);
 
 		// timer to reset panels
 		new java.util.Timer().schedule(new java.util.TimerTask() {
@@ -448,6 +494,10 @@ public class ElevatorRequestPanel implements ActionListener {
 		}, 5000);
 
 		return jp;
+	}
+
+	private void turnImgIntoGif(JLabel labelToChange, Icon icon_gifToChangeInto) {
+		labelToChange.setIcon(icon_gifToChangeInto);
 	}
 
 	/**
@@ -486,6 +536,8 @@ public class ElevatorRequestPanel implements ActionListener {
 			this.requestPanel.repaint();
 			this.confirmBtn.setEnabled(false);
 
+
+
 		}
 		// person radio btn is clicked
 		else if (action.equals(ElevatorTypes.PERSON.name())) {
@@ -501,6 +553,7 @@ public class ElevatorRequestPanel implements ActionListener {
 		}
 
 	}
+
 
 	private void resetPanels() {
 		// reset all vars in case of new order

@@ -13,8 +13,6 @@ public class Gui {
 	static String DEFINE_PASSENGER_TYPE = "Was möchten Sie transportieren?";
 
 
-	private ViewController viewController;
-	private ViewController.GuiListener guiListener;
 	private JButton btnPersonen;
 	private JButton btnGueter;
 
@@ -45,7 +43,6 @@ public class Gui {
 		anweisungen.setVisible(false);
 
 		// Add action listener to widgets
-		btnGueter.addActionListener(guiListener);
 
 		frame.add(mainPane);
 		frame.pack();
