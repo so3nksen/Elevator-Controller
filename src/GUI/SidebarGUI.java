@@ -24,6 +24,12 @@ import javax.swing.JPanel;
 import Properties.Props;
 import Util.SaveCsvData;
 
+/**
+ * Class managing the gui in the new version with sidebar for better ui/ux.
+ * 
+ * @author lasse
+ *
+ */
 public class SidebarGUI implements ActionListener {
 
 	// enum of content panels showable

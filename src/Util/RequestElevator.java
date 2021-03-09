@@ -21,15 +21,14 @@ public class RequestElevator {
 	 * @param type           -> type of elevator
 	 * @param isVipRequested -> should it be a vip elevator?
 	 */
-	public void request(int fromFloor, int toFloor, int persons, int weight, ElevatorTypes type,
-			boolean isVipRequested) {
+	public void request(int fromFloor, int toFloor, int persons, int weight, ElevatorTypes type) {
 
 		System.out.println(
 				"########################################################################################################");
 		System.out.println("###[ELEVATOR REQUEST (    REQUEST DATA    )] - From Floor: " + fromFloor + " | To Floor: "
 				+ toFloor + " | Persons: " + persons + " | Weight: " + weight);
 
-		ElevatorTypes typeOfElevator = search(weight, persons, fromFloor, toFloor, type, isVipRequested);
+		ElevatorTypes typeOfElevator = search(weight, persons, fromFloor, toFloor, type);
 
 		// get id of the closest elevator
 		NearestFloor nf = new NearestFloor();
@@ -46,34 +45,31 @@ public class RequestElevator {
 	}
 
 	/**
+	 * Method checking for fitable elevator type with given values.
 	 * 
-	 * @param weight
-	 * @param persons
-	 * @param fromFloor
-	 * @param toFloor
-	 * @param type
-	 * @param isVipRequest
+	 * @param weight    -> weight should be transported.
+	 * @param persons   -> persons should be transported.
+	 * @param fromFloor -> startfloor
+	 * @param toFloor   -> endfloor
+	 * @param type      -> elevatortype
 	 * @return
 	 */
-	private ElevatorTypes search(int weight, int persons, int fromFloor, int toFloor, ElevatorTypes type,
-			boolean isVipRequest) {
+	private ElevatorTypes search(int weight, int persons, int fromFloor, int toFloor, ElevatorTypes type) {
 
 		ElevatorTypes expected = null;
-		if (!isVipRequest) {
-			if (type == ElevatorTypes.PERSON) {
-				if (persons > 15) {
-					expected = ElevatorTypes.PERSON_BIG;
-				} else {
-					expected = ElevatorTypes.PERSON_SMALL;
-				}
-			} else if (type == ElevatorTypes.FREIGHT) {
-				if (weight > 5000) {
-					expected = ElevatorTypes.FREIGHT_BIG;
-				} else {
-					expected = ElevatorTypes.FREIGHT_SMALL;
-				}
+		if (type == ElevatorTypes.PERSON) {
+			if (persons > 15) {
+				expected = ElevatorTypes.PERSON_BIG;
+			} else {
+				expected = ElevatorTypes.PERSON_SMALL;
 			}
-		} else {
+		} else if (type == ElevatorTypes.FREIGHT) {
+			if (weight > 5000) {
+				expected = ElevatorTypes.FREIGHT_BIG;
+			} else {
+				expected = ElevatorTypes.FREIGHT_SMALL;
+			}
+		} else if (type == ElevatorTypes.VIP) {
 			expected = ElevatorTypes.VIP;
 		}
 		return expected;

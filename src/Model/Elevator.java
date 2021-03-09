@@ -1,5 +1,11 @@
 package Model;
 
+/**
+ * Elevator superclass.
+ * 
+ * @author lasse
+ *
+ */
 public class Elevator {
 
 	// Notwendige Kriterien eines jeden Aufzugs

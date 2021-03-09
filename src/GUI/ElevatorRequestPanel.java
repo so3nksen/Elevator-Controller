@@ -25,20 +25,24 @@ import javax.swing.border.EmptyBorder;
 
 import Model.ElevatorTypes;
 import Properties.Props;
+import Util.RequestElevator;
 
 public class ElevatorRequestPanel implements ActionListener {
 
+	// declaration of standard request parameters
 	private ElevatorTypes elevatorType = ElevatorTypes.PERSON;
-	private int personsOrWeight = 0;
+	private int personsOrWeight = 1;
 	private int fromFloor = 0;
 	private int tofloor = 1;
 
+	// prefixes for easier label management
 	private static final String prefixTypeLabel = "Aufzugsart";
 	private static final String prefixPersonWeightLabel = "Einheiten";
 	private static final String prefixStartFloorLabel = "Startstockwerk";
 	private static final String prefixEndFloorLabel = "Endstockwerk";
 	private static final String undefindedLabel = "keine Angabe";
 
+	// initialize panels and buttons needed in whole class
 	private JPanel requestPanel;
 	private JLabel typeSideLabel;
 	private JLabel personWeightSideLabel;
@@ -46,21 +50,29 @@ public class ElevatorRequestPanel implements ActionListener {
 	private JLabel endFloorSideLabel;
 	private JButton confirmBtn;
 
+	// enum representing steps of request process
 	private enum Steps {
 		ONE, TWO, THREE, SUCCESS, NEW
 	}
 
+	/**
+	 * Method returning the jpanel to show in request section.
+	 * 
+	 * @return JPanel -> panel to show.
+	 */
 	public JPanel get() {
 
+		// create root panel
 		JPanel jp = new JPanel(new GridBagLayout());
 		jp.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
-		// initiate grid
+
 		GridBagConstraints c = new GridBagConstraints();
 		c.weightx = 1;
 		c.weighty = 1;
 		c.fill = GridBagConstraints.BOTH;
 		jp.setBackground(Color.WHITE);
 
+		// upper headline
 		JLabel headline = new JLabel(
 				"<html><span style='font-size: 2.4em'><b>Aufzugsauftrag</b></span><br><span style='font-size: 1.56em'>Erstellen Sie mittels des Formulars unten einen neuen Beförderungsauftrag.</span></html>");
 
@@ -70,6 +82,7 @@ public class ElevatorRequestPanel implements ActionListener {
 		c.gridy = 0;
 		jp.add(headline, c);
 
+		// request child panel.
 		requestPanel = createRequestPanel();
 		c.weightx = 0.65;
 		c.weighty = 0.9;
@@ -77,6 +90,7 @@ public class ElevatorRequestPanel implements ActionListener {
 		c.gridy = 1;
 		jp.add(requestPanel, c);
 
+		// spacer for vertical spacing between panels.
 		JPanel spacer = new JPanel();
 		spacer.setBackground(Color.WHITE);
 		c.weightx = 0.05;
@@ -85,6 +99,7 @@ public class ElevatorRequestPanel implements ActionListener {
 		c.gridy = 1;
 		jp.add(spacer, c);
 
+		// right sided confirm child panel.
 		c.weightx = 0.3;
 		c.weighty = 0.85;
 		c.gridx = 2;
@@ -115,13 +130,14 @@ public class ElevatorRequestPanel implements ActionListener {
 	 */
 	private JPanel createConfirmPanel() {
 
+		// root panel of child.
 		JPanel jp = new JPanel(new GridBagLayout());
 		jp.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
-		// initiate grid
 		GridBagConstraints c = new GridBagConstraints();
 		c.weightx = 1;
 		c.weighty = 1;
 
+		// upper headline of sidepanel
 		JLabel confirmPanelPlaceholder = new JLabel(
 				"<html><div style='text-align: center; font-size: 1.12em'><b>Auftragsübersicht</b></div></html>");
 		c.weightx = 1;
@@ -131,6 +147,7 @@ public class ElevatorRequestPanel implements ActionListener {
 		c.gridwidth = 1;
 		jp.add(confirmPanelPlaceholder, c);
 
+		// type label of sidepanel
 		typeSideLabel = new JLabel(createLabelText(prefixTypeLabel, undefindedLabel));
 		c.weightx = 1;
 		c.weighty = 0.1;
@@ -139,6 +156,7 @@ public class ElevatorRequestPanel implements ActionListener {
 		c.gridwidth = 1;
 		jp.add(typeSideLabel, c);
 
+		// units label of sidepanel
 		personWeightSideLabel = new JLabel(createLabelText(prefixPersonWeightLabel, undefindedLabel));
 		c.weightx = 1;
 		c.weighty = 0.1;
@@ -147,6 +165,7 @@ public class ElevatorRequestPanel implements ActionListener {
 		c.gridwidth = 1;
 		jp.add(personWeightSideLabel, c);
 
+		// startfloor label of sidepanel
 		startFloorSideLabel = new JLabel(createLabelText(prefixStartFloorLabel, undefindedLabel));
 		c.weightx = 1;
 		c.weighty = 0.1;
@@ -155,6 +174,7 @@ public class ElevatorRequestPanel implements ActionListener {
 		c.gridwidth = 1;
 		jp.add(startFloorSideLabel, c);
 
+		// endfloor label of sidepanel
 		endFloorSideLabel = new JLabel(createLabelText(prefixEndFloorLabel, undefindedLabel));
 		c.weightx = 1;
 		c.weighty = 0.1;
@@ -163,6 +183,7 @@ public class ElevatorRequestPanel implements ActionListener {
 		c.gridwidth = 1;
 		jp.add(endFloorSideLabel, c);
 
+		// info label of sidepanel
 		JLabel btnInfoLabel = new JLabel(
 				"<html><div style='text-align: left;'><span style='font-size: 0.76em'>Vervollständige deine Anfrage,<br> um den Auftrag bestätigen zu können.</span></div></html>");
 		btnInfoLabel.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
@@ -174,6 +195,7 @@ public class ElevatorRequestPanel implements ActionListener {
 		c.fill = GridBagConstraints.BOTH;
 		jp.add(btnInfoLabel, c);
 
+		// confirm btn of sidepanel
 		confirmBtn = new JButton("<html><div style='text-align: center;'>Auftrag<br>bestätigen</div></html>");
 		confirmBtn.setEnabled(false);
 		confirmBtn.addActionListener(this);
@@ -185,6 +207,7 @@ public class ElevatorRequestPanel implements ActionListener {
 		c.gridwidth = 1;
 		jp.add(confirmBtn, c);
 
+		// reset/new btn of sidepanel
 		JButton newBtn = new JButton("<html><div style='text-align: center;'>Neuer Auftrag</div></html>");
 		newBtn.addActionListener(this);
 		newBtn.setActionCommand(Steps.NEW.name());
@@ -198,9 +221,15 @@ public class ElevatorRequestPanel implements ActionListener {
 		return jp;
 	}
 
+	/**
+	 * Method creating childpanel that shows shows step one of request.
+	 * 
+	 * @return JPanel -> panel to show in step one.
+	 */
 	private JPanel stepOne() {
+
+		// root of step two
 		JPanel jp = new JPanel(new GridBagLayout());
-		// initiate grid
 		GridBagConstraints c = new GridBagConstraints();
 		c.weightx = 1;
 		c.weighty = 1;
@@ -255,13 +284,14 @@ public class ElevatorRequestPanel implements ActionListener {
 	}
 
 	/**
-	 * Step two of request process.
+	 * Method creating childpanel that shows shows step two of request.
 	 * 
-	 * @return JPanel -> The panel that inclued all elements for step two.
+	 * @return JPanel -> panel to show in step one.
 	 */
 	private JPanel stepTwo() {
+
+		// root of step two
 		JPanel jp = new JPanel(new GridBagLayout());
-		// initiate grid
 		GridBagConstraints c = new GridBagConstraints();
 		c.weightx = 1;
 		c.weighty = 1;
@@ -270,7 +300,9 @@ public class ElevatorRequestPanel implements ActionListener {
 		if (this.elevatorType == ElevatorTypes.PERSON) {
 			label = new JLabel(
 					"<html><div style='text-align: center;'><span style='font-size: 2em'>Wie viel Personen wollen Sie befördern?</span></div></html>");
-			String[] numbers = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" };
+			// all possible values of combobox for elevatortype person
+			String[] numbers = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16",
+					"17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30" };
 			@SuppressWarnings({ "unchecked", "rawtypes" })
 			JComboBox numbersCombo = new JComboBox(numbers);
 			numbersCombo.addActionListener(new ActionListener() {
@@ -287,7 +319,8 @@ public class ElevatorRequestPanel implements ActionListener {
 		} else if (this.elevatorType == ElevatorTypes.FREIGHT) {
 			label = new JLabel(
 					"<html><div style='text-align: center;'><span style='font-size: 2em'>Wie viel Gewicht soll befördert werden?</span></div></html>");
-			String[] numbers = { "1000", "2000", "3000", "4000", "5000" };
+			// all possible values of combobox for elevatortype freight
+			String[] numbers = { "1000", "2000", "3000", "4000", "5000", "6000", "7000", "8000", "9000", "10000" };
 			@SuppressWarnings({ "rawtypes", "unchecked" })
 			JComboBox numbersCombo = new JComboBox(numbers);
 			numbersCombo.addActionListener(new ActionListener() {
@@ -306,6 +339,7 @@ public class ElevatorRequestPanel implements ActionListener {
 			label = new JLabel(
 					"<html><div style='text-align: center;'><span style='font-size: 2em'>Wie viele VIPs sollen befördert werden?"
 							+ "</span></div></html>");
+			// all possible values of combobox for elevatortype vip
 			String[] numbers = { "1", "2", "3", "4", "5" };
 			@SuppressWarnings({ "rawtypes", "unchecked" })
 			JComboBox numbersCombo = new JComboBox(numbers);
@@ -335,9 +369,15 @@ public class ElevatorRequestPanel implements ActionListener {
 		return jp;
 	}
 
+	/**
+	 * Method creating childpanel that shows shows step three of request.
+	 * 
+	 * @return JPanel -> panel to show in step one.
+	 */
 	private JPanel stepThree() {
+
+		// root of step three
 		JPanel jp = new JPanel(new GridBagLayout());
-		// initiate grid
 		GridBagConstraints c = new GridBagConstraints();
 		c.weightx = 1;
 		c.weighty = 1;
@@ -403,13 +443,16 @@ public class ElevatorRequestPanel implements ActionListener {
 	}
 
 	/**
-	 * JPanel to show when everything is alright.
+	 * Method creating childpanel that shows success message in final step of
+	 * request.
 	 * 
-	 * @return -> JPanel to show.
+	 * @return JPanel -> panel to show in step one.
 	 */
 	private JPanel stepSuccess() {
+
+		// root of success step
 		JPanel jp = new JPanel(new GridBagLayout());
-		// initiate grid
+
 		GridBagConstraints c = new GridBagConstraints();
 		c.weightx = 1;
 		c.weighty = 1;
@@ -484,6 +527,19 @@ public class ElevatorRequestPanel implements ActionListener {
 		// all is successful
 		else if (action.equals(Steps.SUCCESS.name())) {
 
+			int persons = 0;
+			int weight = 0;
+
+			if (elevatorType == ElevatorTypes.PERSON) {
+				persons = this.personsOrWeight;
+			} else if (elevatorType == ElevatorTypes.FREIGHT) {
+				weight = this.personsOrWeight;
+			} else if (elevatorType == ElevatorTypes.VIP) {
+				persons = this.personsOrWeight;
+			}
+
+			RequestElevator r = new RequestElevator();
+			r.request(this.fromFloor, this.tofloor, persons, weight, this.elevatorType);
 			this.requestPanel.removeAll();
 			this.requestPanel.add(stepSuccess());
 			this.requestPanel.revalidate();

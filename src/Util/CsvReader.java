@@ -13,7 +13,7 @@ import Model.VipElevator;
 import Properties.Props;
 
 /**
- * Util class managing reading all .csv data on programm start
+ * Util class managing reading all .csv data on program start
  * 
  * @author lasse
  *

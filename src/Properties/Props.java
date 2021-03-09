@@ -1,7 +1,7 @@
 package Properties;
 
 /**
- * Util class with properties.
+ * Properties class.
  * 
  * @author lasse
  *

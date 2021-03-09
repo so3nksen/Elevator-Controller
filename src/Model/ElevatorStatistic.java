@@ -1,5 +1,11 @@
 package Model;
 
+/**
+ * Class of the statistic object for elevators.
+ * 
+ * @author lasse
+ *
+ */
 public class ElevatorStatistic {
 
 	ElevatorTypes type;

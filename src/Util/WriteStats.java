@@ -37,8 +37,5 @@ public class WriteStats {
 			obj.setTotalPersonsOrWeight(obj.getTotalPersonsOrWeight() + weightOrPerson);
 
 		}
-
-		System.out.println(list);
-
 	}
 }
