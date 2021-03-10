@@ -8,93 +8,9 @@ __public__
 main()
 }
 }
-package "fahrstuehle"#DDDDDD{
-class Aufzug {
-int Personenzahl
-int maxGewicht
-int aktuellesStockwerk
-__public__
-Aufzug()
-..Getter..
-+getPersonenZahl()
-+getMaxGewicht()
-+getAktuellesStockwerk()
-..Setter..
-#setPersonenZahl()
-#setMaxGewicht()
-#setAktuellesStockwerk()
-}
-
-class Aufzugfahrt {
-__private__
-String AufzugTyp
-int fahrtGewicht
-int personenZahl
-int gefahreneStockwerke
-__public__
-Aufzugfahrt()
-..Getter..
-+getAufzugTyp()
-+getFahrtGewicht()
-+getPersonenZahl()
-+getGefahreneStockwerke()
-..Setter..
-#setAufzugTyp()
-#setFahrtGewicht()
-#setPersonenZahl()
-#setGefahreneStockwerke()
-}
-
-class LastenAufzug<extends Aufzug>{
-__private__
-int qm
-__public__
-LastenAufzug()
-..Getter..
-+getQm()
-..Setter..
-#setQm()
-}
-class MainGui
-class PersonenAufzug<extends Aufzug>{
-__private__
-boolean Melodie
-__public__
-PersonenAufzug()
-..Getter..
-+getMelodie()
-..Setter..
-#setMelodie()
-}
-
-class ViPAufzug<extends Aufzug>{
-__private__
-int maxKmh
-__public__
-VipAufzug()
-..Getter..
-+getMaxKmh()
-..Setter..
-#setMaxKmh()
-}
-}
 
 package "Gui"#DDDDDD{
-class Gui {
-__private__
-build()
-makePersonsOrGoodsVisible()
-__public__
-start()
-enterCarriageType()
-}
-class GuiListener {
-__public__
-double actionPerformed()
-}
-Gui -- GuiListener
 SidebarGUI -- MenuState
-class MainGui
 class SidebarGUI {
 __private__
 enum MenuState
@@ -107,7 +23,9 @@ __public__
 startUserInterface()
 actionPerformed(ActionEvent ae)
 }
-class MenuState
+enum MenuState {
+REQUEST, INFO, STATS, EXIT
+}
 class ElevatorInfoPanel {
 __public__
 ..Getter..
@@ -126,83 +44,78 @@ Jpanel get()
 }
 
 package "Model"#DDDDDD{
-class Aufzug1 {
+class Elevator {
 __private__
 int id
-int personenzahl
-int gesamtgewicht
-int aktuellesStockwerk
---
-hochfahren()
-runterfahren()
-auslesen()
-speichern()
+int maxPersons
+int maxWeight
+int currentFloor
 __public__
 ..Getter..
 +getId()
-+getPersonenzahl()
-+getGesamtgewicht()
-+getAktuellesStockwerk()
++getMaxPersons()
++getMaxWeight()
++getCurrentFloor()
 ..Setter..
 #setId()
-#setPersonenzahl()
-#setGesamtgewicht()
-#setAktuellesStockwerk()
+#setMaxPersons(int maxPersons)
+#setMaxWeight(int maxWeight)
+#setCurrentFloor(int currentFloor)
 }
-class AufzugList {
-Arrrayslist Aufzug
-???????????
-???????????
+class ElevatorStatistic {
+__public__
+ElevatorTypes type
+int totalFloors
+int totalPersonsOrWeight
+..Getter..
+ElevatorTypes getType()
+getTotalFloors()
+getTotalPersonsOrWeight()
+..Setter..
+setType(ElevatorTypes type)
+setTotalFloors(int totalFloors)
+setTotalPersonsOrWeight(int totalPersonsOrWeight)
+}
+class ElevatorList {
+__public__
+Arrrayslist Elevator
 }
 enum ElevatorTypes {
 PERSON_SMALL, PERSON_BIG, FREIGHT_SMALL, FREIGHT_BIG, VIP, FREIGHT, PERSON
 
 }
-class Lastenaufzug<extends Aufzug1> {
+class FreightElevator<extends Elevator> {
 __private__
-int quadratmeter
-boolean kleinOderGross
-__
-lastAngeben()
+String sqaureMeters
 __public__
 ..Getter..
-+getQuadratmeter()
++getSqaureMeters()
 ..Setter..
-#setQuadratmeter()
-#setKleinOderGross()
+#setSquareMeters(String sqaureMeters)
 }
-class Personenaufzug<extends Aufzug1> {
+class PersonElevator<extends Elevator> {
 __private__
-String aufzugsMelodie
-boolean kleinOderGross
-__
-personenUndLastAngeben()
+String musicPlaying
 __public__
 ..Getter..
-+getAufzugsMelodie()
-+getRaumGroesse()
++getMusicPlaying()
 ..Setter..
-#setAufzugsMelodie()
-#setRaumGroesse()
+#setMusicPlaying(String musicPlaying)
 }
-class VIPAufzug<extends Aufzug1> {
+class VipElevator<extends Elevator> {
 __private__
-String passwort
-int maxGeschwindigkeit
-__
-personenUndLastAngeben()
+String maxSpeed
 __public__
 ..Getter..
-+getPasswort()
-+getMaxGeschwindigkeit()
++getMaxSpeed()
 ..Setter..
-#setPasswort()
-#setMaxGeschwindigkeit()
+#setMaxSpeed(String maxSpeed)
 }
 }
 package "Util"#DDDDDD{
 class CsvReader {
 __private__
+readStats()
 readPersonElevators()
 readFreightElevators()
 readVIPElevators()
@@ -215,69 +128,76 @@ getInfos()
 }
 class MoveElevator {
 __public__
-move()
+move(int id, int toFloor)
 }
 class NearestFloor {
 __public__
-serach()
-}
-class Props {
-__public__
-String ABSOLUTE_PATH
-String PERSON_ELEVATOR
-String FREIGHT_ELEVATOR
-String VIP_ELEVATOR
+serach(ElevatorTypes type, int myFloor)
 }
 class RequestElevator {
+__private__
+search(int weight, int persons, int fromFloor, int toFloor, ElevatorTypes type)
 __public__
-reuqest()
+request(int fromFloor, int toFloor, int persons, int weight, ElevatorTypes type)
 }
 class SaveCSVData{
 __private__
-savePersonElevator()
+savePersonElevators()
 saveFreightElevators()
 saveVipElevators()
-writeToFile()
+saveStats()
+writeToFile(String string, String path)
 __public__
 save()
 }
 
 class SearchElevator {
 __public__
-search()
+search(int weight, int persons, int fromFloor, int toFloor, ElevatorTypes type,boolean isVipRequest)
+}
+class WriteStats {
+__public__
+write(ElevatorTypes type, int fromFloor, int toFloor, int weightOrPerson)
 }
 }
 
-package "CSV Tabellen" <<Database>> #3CB371{
+package Properties {
+class Props {
+__public__
+static String ABSOLUTE_PATH
+static final String PERSON_ELEVATOR
+static final String FREIGHT_ELEVATOR
+static final String VIP_ELEVATOR
+static final String STATISTICS
+static final String STATS_ICON
+static final String REQUEST_ICON
+static final String EXIT_ICON
+static final String INFO_ICON
+static final String PERSON_ELEVATOR_ICON
+static final String FREIGHT_ELEVATOR_ICON
+static final String VIP_ELEVATOR_ICON
+static final String CHECK_ICON
+static final String MOVING_ELEVATOR
+}
+}
+}
+package "assets" <<Folder>> #3CB371{
 class "Lastenaufzug Tabelle" <<(T,#FF7700) freightElevators.csv >>
 class "Personenaufzug Tabelle" <<(T,#FF7700) personElevators.csv>>
 class "Statistik Tabelle" <<(T,#FF7700) statistics.csv>>
 class "Vip Aufzug Tabelle" <<(T,#FF7700) vipElevators.csv>>
 }
-}
 'Controller Verbindungen
-Controller ..> Props
 Controller ..> CsvReader
-Controller ..> MainGui
 Controller ..> NearestFloor
 Controller ..> MoveElevator
 Controller ..> ElevatorInfos
-Controller ..> Aufzug
 Controller ..> SaveCSVData
 
-Aufzugfahrt ..> ElevatorTypes
 'Model Verbindungen
-Aufzug1 --* Lastenaufzug
-Aufzug1 --*Personenaufzug
-Aufzug1 --* VIPAufzug
-
-"Util" ..|> "CSV Tabellen" : Save
-"CSV Tabellen" ..|> "Util" : Read, Search
-
-'fahrstuehle Verbindungen
-Aufzug --* LastenAufzug
-Aufzug --* PersonenAufzug
-Aufzug --* ViPAufzug
+Elevator --* FreightElevator
+Elevator --*PersonElevator
+Elevator --* VipElevator
 
 
 @enduml
