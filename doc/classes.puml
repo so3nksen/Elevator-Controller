@@ -1,7 +1,7 @@
 Klassendiagramm unseres Projektes
 
 @startuml
-package "Elevator-Controller"  {
+package "Elevator-Controller/src"  {
 package "Controller" #DDDDDD{
 class Controller {
 __public__
@@ -9,11 +9,11 @@ main()
 }
 }
 
-package "Gui"#DDDDDD{
+package "GUI"#DDDDDD{
 SidebarGUI -- MenuState
 class SidebarGUI {
 __private__
-enum MenuState
+-enum MenuState
 Jpanel root
 Jpanel contentPanel
 __
@@ -27,15 +27,58 @@ enum MenuState {
 REQUEST, INFO, STATS, EXIT
 }
 class ElevatorInfoPanel {
-__public__
+__private__
+-enum KindoOfInfo
+__
+JPanel createChildPanel(int totalFloorsTravelled, int totalPersonsOrWeight, String prefix,
+String pathToImage)
 ..Getter..
++getInfosFromStats(ElevatorTypes type, KindoOfInfo info)
+__public__
 Jpanel get()
 }
+enum KindoOfInfo {
+FLOORS, PERSONS_WEIGHT
+}
+ElevatorInfoPanel -- KindoOfInfo
 class ElevatorRequestPanel {
+__private__
+ElevatorTypes elevatorType
+int personsOrWeight
+int fromFloor
+int tofloor
+__
+*static final String prefixTypeLabel
+*static final String prefixPersonWeightLabel
+*static final String prefixStartFloorLabel
+*static final String prefixEndFloorLabel
+*static final String undefindedLabel
+__
+JPanel requestPanel
+JLabel typeSideLabel
+JLabel personWeightSideLabel
+JLabel startFloorSideLabel
+JLabel endFloorSideLabel
+JButton confirmBtn
+__
+-enum Steps
 __public__
-..Getter..
 Jpanel get()
+JPanel createRequestPanel()
+JPanel createConfirmPanel()
+JPanel stepOne()
+JPanel stepTwo()
+JPanel stepThree()
+JPanel stepSuccess()
+actionPerformed(ActionEvent ae)
+resetPanels()
+String createLabelText(String prefix, String value)
 }
+enum Steps {
+ONE, TWO, THREE, SUCCESS, NEW
+}
+
+ElevatorRequestPanel -- Steps
 class ElevatorStatsPanel {
 __public__
 ..Getter..
@@ -68,13 +111,13 @@ ElevatorTypes type
 int totalFloors
 int totalPersonsOrWeight
 ..Getter..
-ElevatorTypes getType()
-getTotalFloors()
-getTotalPersonsOrWeight()
++ElevatorTypes getType()
++getTotalFloors()
++getTotalPersonsOrWeight()
 ..Setter..
-setType(ElevatorTypes type)
-setTotalFloors(int totalFloors)
-setTotalPersonsOrWeight(int totalPersonsOrWeight)
+#setType(ElevatorTypes type)
+#setTotalFloors(int totalFloors)
+#setTotalPersonsOrWeight(int totalPersonsOrWeight)
 }
 class ElevatorList {
 __public__
@@ -124,7 +167,7 @@ read()
 }
 class ElevatorInfos {
 __public__
-getInfos()
+getInfos(int id)
 }
 class MoveElevator {
 __public__
@@ -161,38 +204,34 @@ write(ElevatorTypes type, int fromFloor, int toFloor, int weightOrPerson)
 }
 }
 
-package Properties {
+package Properties #DDDDDD {
 class Props {
 __public__
-static String ABSOLUTE_PATH
-static final String PERSON_ELEVATOR
-static final String FREIGHT_ELEVATOR
-static final String VIP_ELEVATOR
-static final String STATISTICS
-static final String STATS_ICON
-static final String REQUEST_ICON
-static final String EXIT_ICON
-static final String INFO_ICON
-static final String PERSON_ELEVATOR_ICON
-static final String FREIGHT_ELEVATOR_ICON
-static final String VIP_ELEVATOR_ICON
-static final String CHECK_ICON
-static final String MOVING_ELEVATOR
+*static String ABSOLUTE_PATH
+*static final String PERSON_ELEVATOR
+*static final String FREIGHT_ELEVATOR
+*static final String VIP_ELEVATOR
+*static final String STATISTICS
+*static final String STATS_ICON
+*static final String REQUEST_ICON
+*static final String EXIT_ICON
+*static final String INFO_ICON
+*static final String PERSON_ELEVATOR_ICON
+*static final String FREIGHT_ELEVATOR_ICON
+*static final String VIP_ELEVATOR_ICON
+*static final String CHECK_ICON
+*static final String MOVING_ELEVATOR
 }
 }
 }
-package "assets" <<Folder>> #3CB371{
+package "Elevator-Controller/assets/csv" <<Folder>> #3CB371{
 class "Lastenaufzug Tabelle" <<(T,#FF7700) freightElevators.csv >>
 class "Personenaufzug Tabelle" <<(T,#FF7700) personElevators.csv>>
 class "Statistik Tabelle" <<(T,#FF7700) statistics.csv>>
 class "Vip Aufzug Tabelle" <<(T,#FF7700) vipElevators.csv>>
 }
 'Controller Verbindungen
-Controller ..> CsvReader
-Controller ..> NearestFloor
-Controller ..> MoveElevator
-Controller ..> ElevatorInfos
-Controller ..> SaveCSVData
+
 
 'Model Verbindungen
 Elevator --* FreightElevator
