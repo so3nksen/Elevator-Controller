@@ -96,7 +96,7 @@ public class SaveCsvData {
 		sb.append("type;totalValue;totalFloors" + System.lineSeparator());
 		for (ElevatorStatistic es : ElevatorList.getStatisticList()) {
 			sb.append(es.getType() + ";");
-			sb.append(es.getTotalPersonsOrWeight());
+			sb.append(es.getTotalPersonsOrWeight() + ";");
 			sb.append(es.getTotalFloors() + System.lineSeparator());
 
 		}

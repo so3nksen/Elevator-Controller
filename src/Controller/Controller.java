@@ -14,7 +14,7 @@ import Util.CsvReader;
  */
 public class Controller {
 
-	public static void main(String[] args) {
+	public void start() {
 
 		// set absolute path of java application
 		Props.ABSOLUTE_PATH = new File("").getAbsolutePath();

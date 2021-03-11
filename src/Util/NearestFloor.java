@@ -26,25 +26,28 @@ public class NearestFloor {
 
 		int distanceBetween = 999999999;
 		int nearestElevatorInFloor = 0;
+		int idOfElevator = -1;
 
 		// check for the closest personElevator
 		if (type == ElevatorTypes.PERSON_SMALL || type == ElevatorTypes.PERSON_BIG) {
 
-			for (Elevator aufzug : ElevatorList.getElevatorList()) {
-				if (aufzug instanceof PersonElevator) {
+			for (Elevator e : ElevatorList.getElevatorList()) {
+				if (e instanceof PersonElevator) {
 					if (type == ElevatorTypes.PERSON_BIG) {
-						if (aufzug.getMaxPersons() > 15) {
-							int d = Math.abs(myFloor - aufzug.getCurrentFloor());
+						if (e.getMaxPersons() > 15) {
+							int d = Math.abs(myFloor - e.getCurrentFloor());
 							if (d < distanceBetween) {
 								distanceBetween = d;
-								nearestElevatorInFloor = aufzug.getCurrentFloor();
+								nearestElevatorInFloor = e.getCurrentFloor();
+								idOfElevator = e.getId();
 							}
 						}
 					} else {
-						int d = Math.abs(myFloor - aufzug.getCurrentFloor());
+						int d = Math.abs(myFloor - e.getCurrentFloor());
 						if (d < distanceBetween) {
 							distanceBetween = d;
-							nearestElevatorInFloor = aufzug.getCurrentFloor();
+							nearestElevatorInFloor = e.getCurrentFloor();
+							idOfElevator = e.getId();
 						}
 					}
 				}
@@ -54,21 +57,23 @@ public class NearestFloor {
 		// check for the closest freightElevator
 		else if (type == ElevatorTypes.FREIGHT_SMALL || type == ElevatorTypes.FREIGHT_BIG) {
 
-			for (Elevator aufzug : ElevatorList.getElevatorList()) {
-				if (aufzug instanceof FreightElevator) {
+			for (Elevator e : ElevatorList.getElevatorList()) {
+				if (e instanceof FreightElevator) {
 					if (type == ElevatorTypes.FREIGHT_BIG) {
-						if (aufzug.getMaxWeight() > 5000) {
-							int d = Math.abs(myFloor - aufzug.getCurrentFloor());
+						if (e.getMaxWeight() > 5000) {
+							int d = Math.abs(myFloor - e.getCurrentFloor());
 							if (d < distanceBetween) {
 								distanceBetween = d;
-								nearestElevatorInFloor = aufzug.getCurrentFloor();
+								nearestElevatorInFloor = e.getCurrentFloor();
+								idOfElevator = e.getId();
 							}
 						}
 					} else {
-						int d = Math.abs(myFloor - aufzug.getCurrentFloor());
+						int d = Math.abs(myFloor - e.getCurrentFloor());
 						if (d < distanceBetween) {
 							distanceBetween = d;
-							nearestElevatorInFloor = aufzug.getCurrentFloor();
+							nearestElevatorInFloor = e.getCurrentFloor();
+							idOfElevator = e.getId();
 						}
 					}
 				}
@@ -78,12 +83,13 @@ public class NearestFloor {
 		// check for closest vip elevator
 		else if (type == ElevatorTypes.VIP) {
 
-			for (Elevator aufzug : ElevatorList.getElevatorList()) {
-				if (aufzug instanceof VipElevator) {
-					int d = Math.abs(myFloor - aufzug.getCurrentFloor());
+			for (Elevator e : ElevatorList.getElevatorList()) {
+				if (e instanceof VipElevator) {
+					int d = Math.abs(myFloor - e.getCurrentFloor());
 					if (d < distanceBetween) {
 						distanceBetween = d;
-						nearestElevatorInFloor = aufzug.getCurrentFloor();
+						nearestElevatorInFloor = e.getCurrentFloor();
+						idOfElevator = e.getId();
 					}
 				}
 			}
@@ -91,7 +97,7 @@ public class NearestFloor {
 		System.out.println(
 				"###[ELEVATOR NEAREST (                    )] - Nearest elevator to your current location is in the "
 						+ nearestElevatorInFloor + "th floor.");
-		return nearestElevatorInFloor;
+		return idOfElevator;
 	}
 
 }

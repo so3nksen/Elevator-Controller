@@ -235,7 +235,7 @@ public class ElevatorRequestPanel implements ActionListener {
 		c.weighty = 1;
 
 		JLabel label = new JLabel(
-				"<html><div style='text-align: center;'><span style='font-size: 2em'>Was möchten Sie transportieren?"
+				"<html><div style='text-align: center;'><span style='font-size: 2em'>Was möchten Sie transportieren?<br>&nbsp;"
 						+ "</span></div></html>");
 		c.gridx = 0;
 		c.gridy = 0;
@@ -272,11 +272,17 @@ public class ElevatorRequestPanel implements ActionListener {
 		group.add(radioFreight);
 		group.add(radioVip);
 
+		JPanel spacer = new JPanel();
+		c.gridx = 0;
+		c.gridy = 2;
+		c.gridwidth = 3;
+		jp.add(spacer, c);
+
 		JButton nextBtn = new JButton("Weiter");
 		nextBtn.addActionListener(this);
 		nextBtn.setActionCommand(Steps.ONE.name());
 		c.gridx = 0;
-		c.gridy = 2;
+		c.gridy = 3;
 		c.gridwidth = 3;
 		jp.add(nextBtn, c);
 
@@ -299,7 +305,7 @@ public class ElevatorRequestPanel implements ActionListener {
 
 		if (this.elevatorType == ElevatorTypes.PERSON) {
 			label = new JLabel(
-					"<html><div style='text-align: center;'><span style='font-size: 2em'>Wie viel Personen wollen Sie befördern?</span></div></html>");
+					"<html><div style='text-align: center;'><span style='font-size: 2em'>Wie viel Personen wollen Sie befördern?<br>&nbsp;</span></div></html>");
 			// all possible values of combobox for elevatortype person
 			String[] numbers = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16",
 					"17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30" };
@@ -318,7 +324,7 @@ public class ElevatorRequestPanel implements ActionListener {
 			jp.add(numbersCombo, c);
 		} else if (this.elevatorType == ElevatorTypes.FREIGHT) {
 			label = new JLabel(
-					"<html><div style='text-align: center;'><span style='font-size: 2em'>Wie viel Gewicht soll befördert werden?</span></div></html>");
+					"<html><div style='text-align: center;'><span style='font-size: 2em'>Wie viel Gewicht soll befördert werden?<br>&nbsp;</span></div></html>");
 			// all possible values of combobox for elevatortype freight
 			String[] numbers = { "1000", "2000", "3000", "4000", "5000", "6000", "7000", "8000", "9000", "10000" };
 			@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -337,7 +343,7 @@ public class ElevatorRequestPanel implements ActionListener {
 			jp.add(numbersCombo, c);
 		} else if (this.elevatorType == ElevatorTypes.VIP) {
 			label = new JLabel(
-					"<html><div style='text-align: center;'><span style='font-size: 2em'>Wie viele VIPs sollen befördert werden?"
+					"<html><div style='text-align: center;'><span style='font-size: 2em'>Wie viele VIPs sollen befördert werden?<br>&nbsp;"
 							+ "</span></div></html>");
 			// all possible values of combobox for elevatortype vip
 			String[] numbers = { "1", "2", "3", "4", "5" };
@@ -359,11 +365,16 @@ public class ElevatorRequestPanel implements ActionListener {
 		c.gridy = 0;
 		jp.add(label, c);
 
+		JPanel spacer = new JPanel();
+		c.gridx = 0;
+		c.gridy = 2;
+		jp.add(spacer, c);
+
 		JButton nextBtn = new JButton("Weiter");
 		nextBtn.addActionListener(this);
 		nextBtn.setActionCommand(Steps.TWO.name());
 		c.gridx = 0;
-		c.gridy = 2;
+		c.gridy = 3;
 		jp.add(nextBtn, c);
 
 		return jp;
@@ -383,19 +394,19 @@ public class ElevatorRequestPanel implements ActionListener {
 		c.weighty = 1;
 
 		JLabel label = new JLabel(
-				"<html><div style='text-align: center;'><span style='font-size: 2em'>Wo soll der Aufzug starten und wo enden?"
+				"<html><div style='text-align: center;'><span style='font-size: 2em'>Wo soll der Aufzug starten und wo enden?<br>&nbsp;"
 						+ "</span></div></html>");
 		c.gridx = 0;
 		c.gridy = 0;
 		c.gridwidth = 2;
 		jp.add(label, c);
 
-		JLabel confirmLabel = new JLabel(
-				"<html><div style='text-align: center;'><span style='font-size: 1em'>Bitte überprüfe und bestätige deinen Auftrag in der Auftragsübersicht rechts.</span></div></html>");
+		JLabel endLabel = new JLabel(
+				"<html><div style='text-align: center;'><span style='font-size: 1.44em'>Start</span></div></html>");
 		c.gridx = 0;
-		c.gridy = 3;
-		c.gridwidth = 2;
-		jp.add(confirmLabel, c);
+		c.gridy = 1;
+		c.gridwidth = 1;
+		jp.add(endLabel, c);
 
 		String[] floors = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16",
 				"17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33",
@@ -405,7 +416,6 @@ public class ElevatorRequestPanel implements ActionListener {
 				"84", "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99", "100" };
 		@SuppressWarnings({ "rawtypes", "unchecked" })
 		JComboBox startFloorCombo = new JComboBox(floors);
-		startFloorCombo.setSelectedIndex(0);
 		startFloorCombo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				fromFloor = Integer.parseInt((String) startFloorCombo.getSelectedItem());
@@ -418,13 +428,19 @@ public class ElevatorRequestPanel implements ActionListener {
 		});
 		startFloorCombo.setSelectedIndex(0);
 		c.gridx = 0;
-		c.gridy = 1;
+		c.gridy = 2;
 		c.gridwidth = 1;
 		jp.add(startFloorCombo, c);
 
+		JLabel startLabel = new JLabel(
+				"<html><div style='text-align: center;'><span style='font-size: 1.44em'>Ende</span></div></html>");
+		c.gridx = 1;
+		c.gridy = 1;
+		c.gridwidth = 1;
+		jp.add(startLabel, c);
+
 		@SuppressWarnings({ "rawtypes", "unchecked" })
 		JComboBox endFloorCombo = new JComboBox(floors);
-		endFloorCombo.setSelectedIndex(1);
 		endFloorCombo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tofloor = Integer.parseInt((String) endFloorCombo.getSelectedItem());
@@ -435,9 +451,22 @@ public class ElevatorRequestPanel implements ActionListener {
 		});
 		endFloorCombo.setSelectedIndex(1);
 		c.gridx = 1;
-		c.gridy = 1;
+		c.gridy = 2;
 		c.gridwidth = 1;
 		jp.add(endFloorCombo, c);
+
+		JPanel spacer = new JPanel();
+		c.gridx = 0;
+		c.gridy = 3;
+		c.gridwidth = 3;
+		jp.add(spacer, c);
+
+		JLabel confirmLabel = new JLabel(
+				"<html><div style='text-align: center;'><span style='font-size: 1.2em'>Bitte überprüfe und bestätige deinen Auftrag in der Auftragsübersicht rechts.</span></div></html>");
+		c.gridx = 0;
+		c.gridy = 4;
+		c.gridwidth = 2;
+		jp.add(confirmLabel, c);
 
 		return jp;
 	}
@@ -481,7 +510,7 @@ public class ElevatorRequestPanel implements ActionListener {
 		jp.add(iconPanel, c);
 
 		JLabel label = new JLabel(
-				"<html><div style='text-align: center;'><span style='font-size: 1.4em'><b>Ein Aufzug aus dem 3. Stock ist auf dem Weg zu Dir.</b><<br><br><span style='font-size: 1em'><i>In Kürze wird die Steuerung resetted.</i></span>");
+				"<html><div style='text-align: center;'><span style='font-size: 1.4em'><b>Ein Aufzug ist auf dem Weg zu Dir.</b><<br><br><span style='font-size: 1em'><i>In Kürze wird die Steuerung resetted.</i></span>");
 		c.weighty = 0.5;
 		c.gridx = 0;
 		c.gridy = 1;

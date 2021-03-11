@@ -22,17 +22,12 @@ public class MoveElevator {
 		for (Elevator e : ElevatorList.getElevatorList()) {
 
 			if (e.getId() == id) {
-				if (e.getCurrentFloor() != toFloor) {
-					System.out.println("###[ELEVATOR STATUS  (   MOVEMENT START   )] - Elevator #" + id
-							+ " now moving from " + e.getCurrentFloor() + "th to the " + toFloor + "th floor.");
-					e.setCurrentFloor(toFloor);
-					System.out.println("###[ELEVATOR STATUS  (    MOVEMENT END    )] - Elevator #" + id
-							+ " reached the " + e.getCurrentFloor() + "th floor.");
-					break;
-				} else {
-					System.out.println("###[ELEVATOR STATUS  (NO MOVEMENT REQUIRED)] - Elevator #" + id
-							+ " already in the " + e.getCurrentFloor() + "th floor.");
-				}
+				System.out.println("###[ELEVATOR STATUS  (   MOVEMENT START   )] - Elevator #" + id
+						+ " now moving from " + e.getCurrentFloor() + "th to the " + toFloor + "th floor.");
+				e.setCurrentFloor(toFloor);
+				System.out.println("###[ELEVATOR STATUS  (    MOVEMENT END    )] - Elevator #" + id + " reached the "
+						+ e.getCurrentFloor() + "th floor.");
+				break;
 			}
 		}
 	}

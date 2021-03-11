@@ -33,9 +33,10 @@ public class RequestElevator {
 		System.out.println(
 				"########################################################################################################");
 		System.out.println("###[ELEVATOR REQUEST (    REQUEST DATA    )] - From Floor: " + fromFloor + " | To Floor: "
-				+ toFloor + " | Persons: " + persons + " | Weight: " + weight);
+				+ toFloor + " | Persons: " + persons + " | Weight: " + weight + " | Type: " + type);
 
-		ElevatorTypes typeOfElevator = search(weight, persons, fromFloor, toFloor, type);
+		SearchElevator se = new SearchElevator();
+		ElevatorTypes typeOfElevator = se.search(weight, persons, fromFloor, toFloor, type);
 
 		// get id of the closest elevator
 		NearestFloor nf = new NearestFloor();
@@ -49,37 +50,6 @@ public class RequestElevator {
 		WriteStats ws = new WriteStats();
 		ws.write(type, fromFloor, toFloor, statsValue);
 
-	}
-
-	/**
-	 * Method checking for fitable elevator type with given values.
-	 * 
-	 * @param weight    -> weight should be transported.
-	 * @param persons   -> persons should be transported.
-	 * @param fromFloor -> startfloor
-	 * @param toFloor   -> endfloor
-	 * @param type      -> elevatortype
-	 * @return
-	 */
-	private ElevatorTypes search(int weight, int persons, int fromFloor, int toFloor, ElevatorTypes type) {
-
-		ElevatorTypes expected = null;
-		if (type == ElevatorTypes.PERSON) {
-			if (persons > 15) {
-				expected = ElevatorTypes.PERSON_BIG;
-			} else {
-				expected = ElevatorTypes.PERSON_SMALL;
-			}
-		} else if (type == ElevatorTypes.FREIGHT) {
-			if (weight > 5000) {
-				expected = ElevatorTypes.FREIGHT_BIG;
-			} else {
-				expected = ElevatorTypes.FREIGHT_SMALL;
-			}
-		} else if (type == ElevatorTypes.VIP) {
-			expected = ElevatorTypes.VIP;
-		}
-		return expected;
 	}
 
 }

@@ -51,7 +51,7 @@ public class ElevatorStatsPanel {
 
 		// upper headline
 		JLabel headline = new JLabel(
-				"<html><span style='font-size: 2.4em'><b>Aufzugsstatistiken</b></span><br><span style='font-size: 1.56em'>Nachfolgend werden die gesamten Systemstatistiken des Aufzug-Controllers angezeigt.</span></html>");
+				"<html><span style='font-size: 2.4em'><b>Aufzugsstatistiken</b></span><br><span style='font-size: 1.56em'>Nachfolgend werden die gesamten Systemstatistiken des Aufzug-Controllers angezeigt.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></html>");
 		c.weightx = 1;
 		c.weighty = 0.2;
 		c.gridx = 0;
@@ -150,8 +150,8 @@ public class ElevatorStatsPanel {
 
 		// total floors travelled label
 		JLabel floorsTravelled = new JLabel(
-				"<html><div style='text-align: center;'><span style='font-size: 1.44em;'>Stockwerke zurückgelegt: </span><br> <b><span style='font-size: 5em;'>"
-						+ totalFloorsTravelled + "</span></b></div></html>)");
+				"<html><div style='text-align: center;'><span style='font-size: 1.44em;'>Stockwerke zurückgelegt: </span><br> <b><span style='font-size: 4em;'>"
+						+ totalPersonsOrWeight + "</span></b></div></html>)");
 		c.weightx = 1;
 		c.weighty = 0.33;
 		c.gridx = 0;
@@ -162,7 +162,7 @@ public class ElevatorStatsPanel {
 		// total persons or weight moved label
 		JLabel totalPersonsWeight = new JLabel(
 				"<html><div style='text-align: center;'><span style='font-size: 1.44em;'>" + prefix
-						+ " befördert:</span><br> <b><span style='font-size: 4em;'>" + totalPersonsOrWeight
+						+ " befördert:</span><br> <b><span style='font-size: 4em;'>" + totalFloorsTravelled
 						+ "</span></b></div></html>");
 		c.weightx = 1;
 		c.weighty = 0.33;

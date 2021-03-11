@@ -24,7 +24,6 @@ public class CsvReader {
 	 * init reading process of all .csv documents.
 	 */
 	public void read() {
-		// console status
 		System.out.println("[STATUS] Reading CSV...");
 		// read data for every .csv file
 		readPersonElevators();
