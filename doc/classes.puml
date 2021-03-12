@@ -5,7 +5,7 @@ package "Elevator-Controller/src"  {
 package "Controller" #DDDDDD{
 class Controller {
 __public__
-main()
++main()
 }
 }
 
@@ -14,85 +14,85 @@ SidebarGUI -- MenuState
 class SidebarGUI {
 __private__
 -enum MenuState
-Jpanel root
-Jpanel contentPanel
+-Jpanel root
+-Jpanel contentPanel
 __
-JFrame createFrame()
-Jpanel createSideBar()
+-JFrame createFrame()
+-Jpanel createSideBar()
 __public__
-startUserInterface()
-actionPerformed(ActionEvent ae)
++startUserInterface()
++actionPerformed(ActionEvent ae)
 }
 enum MenuState {
 REQUEST, INFO, STATS, EXIT
 }
-class ElevatorInfoPanel {
+class ElevatorStatsPanel {
 __private__
 -enum KindoOfInfo
 __
-JPanel createChildPanel(int totalFloorsTravelled, int totalPersonsOrWeight, String prefix,
+-JPanel createChildPanel(int totalFloorsTravelled, int totalPersonsOrWeight, String prefix,
 String pathToImage)
 ..Getter..
-+getInfosFromStats(ElevatorTypes type, KindoOfInfo info)
+-getInfosFromStats(ElevatorTypes type, KindoOfInfo info)
 __public__
-Jpanel get()
++Jpanel get()
 }
 enum KindoOfInfo {
-FLOORS, PERSONS_WEIGHT
+-FLOORS, PERSONS_WEIGHT
 }
 ElevatorInfoPanel -- KindoOfInfo
 class ElevatorRequestPanel {
 __private__
-ElevatorTypes elevatorType
-int personsOrWeight
-int fromFloor
-int tofloor
+-ElevatorTypes elevatorType
+-int personsOrWeight
+-int fromFloor
+-int tofloor
 __
-*static final String prefixTypeLabel
-*static final String prefixPersonWeightLabel
-*static final String prefixStartFloorLabel
-*static final String prefixEndFloorLabel
-*static final String undefindedLabel
+-static final String prefixTypeLabel
+-static final String prefixPersonWeightLabel
+-static final String prefixStartFloorLabel
+-static final String prefixEndFloorLabel
+-static final String undefindedLabel
 __
-JPanel requestPanel
-JLabel typeSideLabel
-JLabel personWeightSideLabel
-JLabel startFloorSideLabel
-JLabel endFloorSideLabel
-JButton confirmBtn
+-JPanel requestPanel
+-JLabel typeSideLabel
+-JLabel personWeightSideLabel
+-JLabel startFloorSideLabel
+-JLabel endFloorSideLabel
+-JButton confirmBtn
 __
 -enum Steps
 __public__
-Jpanel get()
-JPanel createRequestPanel()
-JPanel createConfirmPanel()
-JPanel stepOne()
-JPanel stepTwo()
-JPanel stepThree()
-JPanel stepSuccess()
-actionPerformed(ActionEvent ae)
-resetPanels()
-String createLabelText(String prefix, String value)
++Jpanel get()
++JPanel createRequestPanel()
++JPanel createConfirmPanel()
++JPanel stepOne()
++JPanel stepTwo()
++JPanel stepThree()
++JPanel stepSuccess()
++actionPerformed(ActionEvent ae)
++resetPanels()
++String createLabelText(String prefix, String value)
 }
 enum Steps {
-ONE, TWO, THREE, SUCCESS, NEW
+-ONE, TWO, THREE, SUCCESS, NEW
 }
 
 ElevatorRequestPanel -- Steps
-class ElevatorStatsPanel {
+class ElevatorInfoPanel {
 __public__
 ..Getter..
-Jpanel get()
++Jpanel get()
 }
 }
 
 package "Model"#DDDDDD{
 class Elevator {
 __private__
-int id
-int maxPersons
-int maxWeight
-int currentFloor
+-int id
+-int maxPersons
+-int maxWeight
+-int currentFloor
 __public__
 ..Getter..
 +getId()
@@ -100,127 +100,127 @@ __public__
 +getMaxWeight()
 +getCurrentFloor()
 ..Setter..
-#setId()
-#setMaxPersons(int maxPersons)
-#setMaxWeight(int maxWeight)
-#setCurrentFloor(int currentFloor)
++setId()
++setMaxPersons(int maxPersons)
++setMaxWeight(int maxWeight)
++setCurrentFloor(int currentFloor)
 }
 class ElevatorStatistic {
 __public__
-ElevatorTypes type
-int totalFloors
-int totalPersonsOrWeight
++ElevatorTypes type
++int totalFloors
++int totalPersonsOrWeight
 ..Getter..
 +ElevatorTypes getType()
 +getTotalFloors()
 +getTotalPersonsOrWeight()
 ..Setter..
-#setType(ElevatorTypes type)
-#setTotalFloors(int totalFloors)
-#setTotalPersonsOrWeight(int totalPersonsOrWeight)
++setType(ElevatorTypes type)
++setTotalFloors(int totalFloors)
++setTotalPersonsOrWeight(int totalPersonsOrWeight)
 }
 class ElevatorList {
 __public__
-Arrrayslist Elevator
++Arrrayslist Elevator
 }
 enum ElevatorTypes {
-PERSON_SMALL, PERSON_BIG, FREIGHT_SMALL, FREIGHT_BIG, VIP, FREIGHT, PERSON
+-PERSON_SMALL, PERSON_BIG, FREIGHT_SMALL, FREIGHT_BIG, VIP, FREIGHT, PERSON
 
 }
 class FreightElevator<extends Elevator> {
 __private__
-String sqaureMeters
+-String sqaureMeters
 __public__
 ..Getter..
 +getSqaureMeters()
 ..Setter..
-#setSquareMeters(String sqaureMeters)
++setSquareMeters(String sqaureMeters)
 }
 class PersonElevator<extends Elevator> {
 __private__
-String musicPlaying
+-String musicPlaying
 __public__
 ..Getter..
 +getMusicPlaying()
 ..Setter..
-#setMusicPlaying(String musicPlaying)
++setMusicPlaying(String musicPlaying)
 }
 class VipElevator<extends Elevator> {
 __private__
-String maxSpeed
+-String maxSpeed
 __public__
 ..Getter..
 +getMaxSpeed()
 ..Setter..
-#setMaxSpeed(String maxSpeed)
++setMaxSpeed(String maxSpeed)
 }
 }
 package "Util"#DDDDDD{
 class CsvReader {
 __private__
-readStats()
-readPersonElevators()
-readFreightElevators()
-readVIPElevators()
+-readStats()
+-readPersonElevators()
+-readFreightElevators()
+-readVIPElevators()
 __public__
-read()
++read()
 }
 class ElevatorInfos {
 __public__
-getInfos(int id)
++getInfos(int id)
 }
 class MoveElevator {
 __public__
-move(int id, int toFloor)
++move(int id, int toFloor)
 }
 class NearestFloor {
 __public__
-serach(ElevatorTypes type, int myFloor)
++serach(ElevatorTypes type, int myFloor)
 }
 class RequestElevator {
 __private__
-search(int weight, int persons, int fromFloor, int toFloor, ElevatorTypes type)
+-search(int weight, int persons, int fromFloor, int toFloor, ElevatorTypes type)
 __public__
-request(int fromFloor, int toFloor, int persons, int weight, ElevatorTypes type)
++request(int fromFloor, int toFloor, int persons, int weight, ElevatorTypes type)
 }
 class SaveCSVData{
 __private__
-savePersonElevators()
-saveFreightElevators()
-saveVipElevators()
-saveStats()
-writeToFile(String string, String path)
+-savePersonElevators()
+-saveFreightElevators()
+-saveVipElevators()
+-saveStats()
+-writeToFile(String string, String path)
 __public__
-save()
++save()
 }
 
 class SearchElevator {
 __public__
-search(int weight, int persons, int fromFloor, int toFloor, ElevatorTypes type,boolean isVipRequest)
++search(int weight, int persons, int fromFloor, int toFloor, ElevatorTypes type,boolean isVipRequest)
 }
 class WriteStats {
 __public__
-write(ElevatorTypes type, int fromFloor, int toFloor, int weightOrPerson)
++write(ElevatorTypes type, int fromFloor, int toFloor, int weightOrPerson)
 }
 }
 
 package Properties #DDDDDD {
 class Props {
 __public__
-*static String ABSOLUTE_PATH
-*static final String PERSON_ELEVATOR
-*static final String FREIGHT_ELEVATOR
-*static final String VIP_ELEVATOR
-*static final String STATISTICS
-*static final String STATS_ICON
-*static final String REQUEST_ICON
-*static final String EXIT_ICON
-*static final String INFO_ICON
-*static final String PERSON_ELEVATOR_ICON
-*static final String FREIGHT_ELEVATOR_ICON
-*static final String VIP_ELEVATOR_ICON
-*static final String CHECK_ICON
-*static final String MOVING_ELEVATOR
++static String ABSOLUTE_PATH
++static final String PERSON_ELEVATOR
++static final String FREIGHT_ELEVATOR
++static final String VIP_ELEVATOR
++static final String STATISTICS
++static final String STATS_ICON
++static final String REQUEST_ICON
++static final String EXIT_ICON
++static final String INFO_ICON
++static final String PERSON_ELEVATOR_ICON
++static final String FREIGHT_ELEVATOR_ICON
++static final String VIP_ELEVATOR_ICON
++static final String CHECK_ICON
++static final String MOVING_ELEVATOR
 }
 }
 }
@@ -230,12 +230,9 @@ class "Personenaufzug Tabelle" <<(T,#FF7700) personElevators.csv>>
 class "Statistik Tabelle" <<(T,#FF7700) statistics.csv>>
 class "Vip Aufzug Tabelle" <<(T,#FF7700) vipElevators.csv>>
 }
-'Controller Verbindungen
 
-
-'Model Verbindungen
 Elevator --* FreightElevator
-Elevator --*PersonElevator
+Elevator --* PersonElevator
 Elevator --* VipElevator
 
 
