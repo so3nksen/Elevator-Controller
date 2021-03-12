@@ -165,10 +165,6 @@ __private__
 __public__
 +read()
 }
-class ElevatorInfos {
-__public__
-+getInfos(int id)
-}
 class MoveElevator {
 __public__
 +move(int id, int toFloor)
@@ -178,8 +174,6 @@ __public__
 +serach(ElevatorTypes type, int myFloor)
 }
 class RequestElevator {
-__private__
--search(int weight, int persons, int fromFloor, int toFloor, ElevatorTypes type)
 __public__
 +request(int fromFloor, int toFloor, int persons, int weight, ElevatorTypes type)
 }
@@ -196,8 +190,9 @@ __public__
 
 class SearchElevator {
 __public__
-+search(int weight, int persons, int fromFloor, int toFloor, ElevatorTypes type,boolean isVipRequest)
++ElevatorTypes search(int weight, int persons, int fromFloor, int toFloor, ElevatorTypes type)
 }
+
 class WriteStats {
 __public__
 +write(ElevatorTypes type, int fromFloor, int toFloor, int weightOrPerson)
@@ -221,6 +216,12 @@ __public__
 +static final String VIP_ELEVATOR_ICON
 +static final String CHECK_ICON
 +static final String MOVING_ELEVATOR
+}
+}
+package Main #DDDDDD {
+class Main{
+__public__
++main(String[] args)
 }
 }
 }
