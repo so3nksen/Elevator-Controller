@@ -1,235 +1,280 @@
-Klassendiagramm unseres Projektes
-
 @startuml
+
+'Anfang src
 package "Elevator-Controller/src"  {
+
+'Anfang Controller
 package "Controller" #DDDDDD{
+
 class Controller {
-__public__
-+main()
+    __public__
+        +main()
+    }
 }
+'Ende Controller
+
+'Anfang Gui
+package "GUI"#DDDDDD{
+
+SidebarGUI -- MenuState
+
+class SidebarGUI {
+    __private__
+        -enum MenuState
+        -Jpanel root
+        -Jpanel contentPanel
+    __
+        -JFrame createFrame()
+        -Jpanel createSideBar()
+    __public__
+        +startUserInterface()
+        +actionPerformed(ActionEvent ae)
 }
 
-package "GUI"#DDDDDD{
-SidebarGUI -- MenuState
-class SidebarGUI {
-__private__
--enum MenuState
--Jpanel root
--Jpanel contentPanel
-__
--JFrame createFrame()
--Jpanel createSideBar()
-__public__
-+startUserInterface()
-+actionPerformed(ActionEvent ae)
-}
 enum MenuState {
-REQUEST, INFO, STATS, EXIT
+    REQUEST, INFO, STATS, EXIT
 }
+
 class ElevatorStatsPanel {
-__private__
--enum KindoOfInfo
-__
--JPanel createChildPanel(int totalFloorsTravelled, int totalPersonsOrWeight, String prefix,
-String pathToImage)
+    __private__
+        -enum KindoOfInfo
+    __
+        -JPanel createChildPanel(int totalFloorsTravelled, int totalPersonsOrWeight, String prefix,
+        String pathToImage)
 ..Getter..
--getInfosFromStats(ElevatorTypes type, KindoOfInfo info)
-__public__
-+Jpanel get()
+        -getInfosFromStats(ElevatorTypes type, KindoOfInfo info)
+    __public__
+        +Jpanel get()
 }
+
 enum KindoOfInfo {
--FLOORS, PERSONS_WEIGHT
+    -FLOORS, PERSONS_WEIGHT
 }
+
 ElevatorInfoPanel -- KindoOfInfo
+
 class ElevatorRequestPanel {
-__private__
--ElevatorTypes elevatorType
--int personsOrWeight
--int fromFloor
--int tofloor
-__
--static final String prefixTypeLabel
--static final String prefixPersonWeightLabel
--static final String prefixStartFloorLabel
--static final String prefixEndFloorLabel
--static final String undefindedLabel
-__
--JPanel requestPanel
--JLabel typeSideLabel
--JLabel personWeightSideLabel
--JLabel startFloorSideLabel
--JLabel endFloorSideLabel
--JButton confirmBtn
-__
--enum Steps
-__public__
-+Jpanel get()
-+JPanel createRequestPanel()
-+JPanel createConfirmPanel()
-+JPanel stepOne()
-+JPanel stepTwo()
-+JPanel stepThree()
-+JPanel stepSuccess()
-+actionPerformed(ActionEvent ae)
-+resetPanels()
-+String createLabelText(String prefix, String value)
+    __private__
+        -ElevatorTypes elevatorType
+        -int personsOrWeight
+        -int fromFloor
+        -int tofloor
+    __
+        -static final String prefixTypeLabel
+        -static final String prefixPersonWeightLabel
+        -static final String prefixStartFloorLabel
+        -static final String prefixEndFloorLabel
+        -static final String undefindedLabel
+    __
+        -JPanel requestPanel
+        -JLabel typeSideLabel
+        -JLabel personWeightSideLabel
+        -JLabel startFloorSideLabel
+        -JLabel endFloorSideLabel
+        -JButton confirmBtn
+    __
+        -enum Steps
+    __public__
+        +Jpanel get()
+        +JPanel createRequestPanel()
+        +JPanel createConfirmPanel()
+        +JPanel stepOne()
+        +JPanel stepTwo()
+        +JPanel stepThree()
+        +JPanel stepSuccess()
+        +actionPerformed(ActionEvent ae)
+        +resetPanels()
+        +String createLabelText(String prefix, String value)
 }
+
 enum Steps {
--ONE, TWO, THREE, SUCCESS, NEW
+    -ONE, TWO, THREE, SUCCESS, NEW
 }
 
 ElevatorRequestPanel -- Steps
+
 class ElevatorInfoPanel {
-__public__
+    __public__
 ..Getter..
-+Jpanel get()
+        +Jpanel get()
+    }
 }
-}
+'Ende GUI
 
+'Anfang Model
 package "Model"#DDDDDD{
-class Elevator {
-__private__
--int id
--int maxPersons
--int maxWeight
--int currentFloor
-__public__
-..Getter..
-+getId()
-+getMaxPersons()
-+getMaxWeight()
-+getCurrentFloor()
-..Setter..
-+setId()
-+setMaxPersons(int maxPersons)
-+setMaxWeight(int maxWeight)
-+setCurrentFloor(int currentFloor)
-}
-class ElevatorStatistic {
-__public__
-+ElevatorTypes type
-+int totalFloors
-+int totalPersonsOrWeight
-..Getter..
-+ElevatorTypes getType()
-+getTotalFloors()
-+getTotalPersonsOrWeight()
-..Setter..
-+setType(ElevatorTypes type)
-+setTotalFloors(int totalFloors)
-+setTotalPersonsOrWeight(int totalPersonsOrWeight)
-}
-class ElevatorList {
-__public__
-+Arrrayslist Elevator
-}
-enum ElevatorTypes {
--PERSON_SMALL, PERSON_BIG, FREIGHT_SMALL, FREIGHT_BIG, VIP, FREIGHT, PERSON
 
+class Elevator {
+    __private__
+        -int id
+        -int maxPersons
+        -int maxWeight
+        -int currentFloor
+    __public__
+..Getter..
+        +getId()
+        +getMaxPersons()
+        +getMaxWeight()
+        +getCurrentFloor()
+        ..Setter..
+        +setId()
+        +setMaxPersons(int maxPersons)
+        +setMaxWeight(int maxWeight)
+        +setCurrentFloor(int currentFloor)
 }
+
+class ElevatorStatistic {
+    __public__
+        +ElevatorTypes type
+        +int totalFloors
+        +int totalPersonsOrWeight
+..Getter..
+        +ElevatorTypes getType()
+        +getTotalFloors()
+        +getTotalPersonsOrWeight()
+..Setter..
+        +setType(ElevatorTypes type)
+        +setTotalFloors(int totalFloors)
+        +setTotalPersonsOrWeight(int totalPersonsOrWeight)
+}
+
+class ElevatorList {
+    __public__
+        +Arrrayslist Elevator
+}
+
+enum ElevatorTypes {
+    -PERSON_SMALL, PERSON_BIG, FREIGHT_SMALL, FREIGHT_BIG, VIP, FREIGHT, PERSON
+}
+
 class FreightElevator<extends Elevator> {
-__private__
--String sqaureMeters
-__public__
+    __private__
+        -String sqaureMeters
+    __public__
 ..Getter..
-+getSqaureMeters()
+        +getSqaureMeters()
 ..Setter..
-+setSquareMeters(String sqaureMeters)
+        +setSquareMeters(String sqaureMeters)
 }
+
 class PersonElevator<extends Elevator> {
-__private__
--String musicPlaying
-__public__
+    __private__
+        -String musicPlaying
+    __public__
 ..Getter..
-+getMusicPlaying()
+        +getMusicPlaying()
 ..Setter..
-+setMusicPlaying(String musicPlaying)
+        +setMusicPlaying(String musicPlaying)
 }
+
 class VipElevator<extends Elevator> {
-__private__
--String maxSpeed
-__public__
+    __private__
+        -String maxSpeed
+    __public__
 ..Getter..
-+getMaxSpeed()
+        +getMaxSpeed()
 ..Setter..
-+setMaxSpeed(String maxSpeed)
+        +setMaxSpeed(String maxSpeed)
+    }
 }
-}
+'Ende Model
+
+'Anfang Util
 package "Util"#DDDDDD{
+
 class CsvReader {
-__private__
--readStats()
--readPersonElevators()
--readFreightElevators()
--readVIPElevators()
-__public__
-+read()
+    __private__
+        -readStats()
+        -readPersonElevators()
+        -readFreightElevators()
+        -readVIPElevators()
+    __public__
+        +read()
 }
+
 class MoveElevator {
-__public__
-+move(int id, int toFloor)
+    __public__
+        +move(int id, int toFloor)
 }
+
 class NearestFloor {
-__public__
-+serach(ElevatorTypes type, int myFloor)
+    __public__
+        +serach(ElevatorTypes type, int myFloor)
 }
+
 class RequestElevator {
-__public__
-+request(int fromFloor, int toFloor, int persons, int weight, ElevatorTypes type)
+    __public__
+        +request(int fromFloor, int toFloor, int persons, int weight, ElevatorTypes type)
 }
+
 class SaveCSVData{
-__private__
--savePersonElevators()
--saveFreightElevators()
--saveVipElevators()
--saveStats()
--writeToFile(String string, String path)
-__public__
-+save()
+    __private__
+        -savePersonElevators()
+        -saveFreightElevators()
+        -saveVipElevators()
+        -saveStats()
+        -writeToFile(String string, String path)
+    __public__
+        +save()
 }
 
 class SearchElevator {
-__public__
-+ElevatorTypes search(int weight, int persons, int fromFloor, int toFloor, ElevatorTypes type)
+    __public__
+        +ElevatorTypes search(int weight, int persons, int fromFloor, int toFloor, ElevatorTypes type)
 }
 
 class WriteStats {
-__public__
-+write(ElevatorTypes type, int fromFloor, int toFloor, int weightOrPerson)
+    __public__
+        +write(ElevatorTypes type, int fromFloor, int toFloor, int weightOrPerson)
+    }
 }
-}
+'Ende Util
 
+'Anfang Properties
 package Properties #DDDDDD {
+
 class Props {
-__public__
-+static String ABSOLUTE_PATH
-+static final String PERSON_ELEVATOR
-+static final String FREIGHT_ELEVATOR
-+static final String VIP_ELEVATOR
-+static final String STATISTICS
-+static final String STATS_ICON
-+static final String REQUEST_ICON
-+static final String EXIT_ICON
-+static final String INFO_ICON
-+static final String PERSON_ELEVATOR_ICON
-+static final String FREIGHT_ELEVATOR_ICON
-+static final String VIP_ELEVATOR_ICON
-+static final String CHECK_ICON
-+static final String MOVING_ELEVATOR
+    __public__
+        +static String ABSOLUTE_PATH
+        +static final String PERSON_ELEVATOR
+        +static final String FREIGHT_ELEVATOR
+        +static final String VIP_ELEVATOR
+        +static final String STATISTICS
+        +static final String STATS_ICON
+        +static final String REQUEST_ICON
+        +static final String EXIT_ICON
+        +static final String INFO_ICON
+        +static final String PERSON_ELEVATOR_ICON
+        +static final String FREIGHT_ELEVATOR_ICON
+        +static final String VIP_ELEVATOR_ICON
+        +static final String CHECK_ICON
+        +static final String MOVING_ELEVATOR
+    }
 }
-}
+'Ende Properties
+
+'Anfang Main
 package Main #DDDDDD {
+
 class Main{
-__public__
-+main(String[] args)
+    __public__
+        +main(String[] args)
+        }
+    }
+'Ende Main
 }
-}
-}
+'Ende src
+
+'Anfang Assets
 package "Elevator-Controller/assets/csv" <<Folder>> #3CB371{
-class "Lastenaufzug Tabelle" <<(T,#FF7700) freightElevators.csv >>
-class "Personenaufzug Tabelle" <<(T,#FF7700) personElevators.csv>>
-class "Statistik Tabelle" <<(T,#FF7700) statistics.csv>>
-class "Vip Aufzug Tabelle" <<(T,#FF7700) vipElevators.csv>>
+
+    class "Lastenaufzug Tabelle" <<(T,#FF7700) freightElevators.csv >>
+
+    class "Personenaufzug Tabelle" <<(T,#FF7700) personElevators.csv>>
+
+    class "Statistik Tabelle" <<(T,#FF7700) statistics.csv>>
+
+    class "Vip Aufzug Tabelle" <<(T,#FF7700) vipElevators.csv>>
 }
 
 Elevator --* FreightElevator
