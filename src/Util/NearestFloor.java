@@ -94,9 +94,8 @@ public class NearestFloor {
 				}
 			}
 		}
-		System.out.println(
-				"###[ELEVATOR NEAREST (                    )] - Nearest elevator to your current location is in the "
-						+ nearestElevatorInFloor + "th floor.");
+		System.out.println("[ELEVATOR] - Nearest elevator to your current location is in the " + nearestElevatorInFloor
+				+ "th floor.");
 		return idOfElevator;
 	}
 

@@ -22,11 +22,9 @@ public class MoveElevator {
 		for (Elevator e : ElevatorList.getElevatorList()) {
 
 			if (e.getId() == id) {
-				System.out.println("###[ELEVATOR STATUS  (   MOVEMENT START   )] - Elevator #" + id
-						+ " now moving from " + e.getCurrentFloor() + "th to the " + toFloor + "th floor.");
+				System.out.println("[ELEVATOR] - Elevator #" + id + " now moving from your current Location to the "
+						+ toFloor + "th floor.");
 				e.setCurrentFloor(toFloor);
-				System.out.println("###[ELEVATOR STATUS  (    MOVEMENT END    )] - Elevator #" + id + " reached the "
-						+ e.getCurrentFloor() + "th floor.");
 				break;
 			}
 		}

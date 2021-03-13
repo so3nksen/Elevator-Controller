@@ -1,7 +1,7 @@
 id;maxPersons;maxWeight;music;currentFloor
 1;15;1200;Hells Bells - ACDC;26
 2;15;1200;Hey Jude - The Beatles;99
-3;15;1200;Party Rock Anthem - LMFAO Feat. Lauren Bennett & GoonRock;4
+3;15;1200;Party Rock Anthem - LMFAO Feat. Lauren Bennett & GoonRock;0
 4;15;1200;Macarena - Los Del Rio;4
 5;15;1200;YEAH! - Usher;5
 6;15;1200;Bette Davis Eyes - Kim Carnes;6
@@ -28,4 +28,4 @@ id;maxPersons;maxWeight;music;currentFloor
 27;30;2400;Royals - Lorde;27
 28;30;2400;Dilemma - Nelly Feat. Kelly Rowland;28
 29;30;2400;Hot Stuff - Donna Summer;29
-30;30;2400;All Night Long (All Night) - Lionel Richie;30
+30;30;2400;All Night Long (All Night) - Lionel Richie;4

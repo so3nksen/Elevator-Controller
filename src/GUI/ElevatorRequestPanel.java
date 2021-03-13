@@ -72,7 +72,7 @@ public class ElevatorRequestPanel implements ActionListener {
 		jp.setBackground(Color.WHITE);
 
 		// upper headline
-		JLabel headline = new JLabel("<html><span style='font-size: 2.4em'><b>Aufzugsauftrag " + Props.PARENT_PATH
+		JLabel headline = new JLabel("<html><span style='font-size: 2.4em'><b>Aufzugsauftrag "
 				+ "</b></span><br><span style='font-size: 1.56em'>Erstellen Sie mittels des Formulars unten einen neuen Beförderungsauftrag.</span></html>");
 
 		c.weightx = 1;

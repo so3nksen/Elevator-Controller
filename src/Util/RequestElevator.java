@@ -32,8 +32,8 @@ public class RequestElevator {
 
 		System.out.println(
 				"########################################################################################################");
-		System.out.println("###[ELEVATOR REQUEST (    REQUEST DATA    )] - From Floor: " + fromFloor + " | To Floor: "
-				+ toFloor + " | Persons: " + persons + " | Weight: " + weight + " | Type: " + type);
+		System.out.println("[ELEVATOR] - Request: From Floor: " + fromFloor + " | To Floor: " + toFloor + " | Persons: "
+				+ persons + " | Weight: " + weight + " | Type: " + type);
 
 		SearchElevator se = new SearchElevator();
 		ElevatorTypes typeOfElevator = se.search(weight, persons, fromFloor, toFloor, type);
