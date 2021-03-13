@@ -47,7 +47,7 @@ public class SaveCsvData {
 				sb.append(e.getCurrentFloor() + System.lineSeparator());
 			}
 		}
-		writeToFile(sb.toString().trim(), Props.ABSOLUTE_PATH + Props.PERSON_ELEVATOR);
+		writeToFile(sb.toString().trim(), Props.PERSON_ELEVATOR);
 	}
 
 	/**
@@ -67,7 +67,7 @@ public class SaveCsvData {
 
 			}
 		}
-		writeToFile(sb.toString().trim(), Props.ABSOLUTE_PATH + Props.FREIGHT_ELEVATOR);
+		writeToFile(sb.toString().trim(), Props.FREIGHT_ELEVATOR);
 	}
 
 	/**
@@ -87,7 +87,7 @@ public class SaveCsvData {
 
 			}
 		}
-		writeToFile(sb.toString().trim(), Props.ABSOLUTE_PATH + Props.VIP_ELEVATOR);
+		writeToFile(sb.toString().trim(), Props.VIP_ELEVATOR);
 	}
 
 	private void saveStats() {
@@ -100,19 +100,19 @@ public class SaveCsvData {
 			sb.append(es.getTotalFloors() + System.lineSeparator());
 
 		}
-		writeToFile(sb.toString().trim(), Props.ABSOLUTE_PATH + Props.STATISTICS);
+		System.out.println(sb.toString());
+		writeToFile(sb.toString().trim(), Props.STATISTICS);
 	}
 
 	private void writeToFile(String string, String path) {
 
-		try (PrintWriter writer = new PrintWriter(new File(path))) {
+		try (PrintWriter writer = new PrintWriter(new File(Props.PARENT_PATH + path))) {
 
 			writer.write(string);
 
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
 		}
-
 	}
 
 }

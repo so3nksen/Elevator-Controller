@@ -37,8 +37,8 @@ public class CsvReader {
 	 * Reads statistics from statistics.csv
 	 */
 	private void readStats() {
-		try (FileReader reader = new FileReader(Props.ABSOLUTE_PATH + Props.STATISTICS);
-				BufferedReader br = new BufferedReader(reader)) {
+
+		try (BufferedReader br = new BufferedReader(new FileReader(Props.PARENT_PATH + Props.STATISTICS))) {
 
 			int i = 0;
 			String line;
@@ -64,7 +64,9 @@ public class CsvReader {
 				}
 				i++;
 			}
-		} catch (IOException e) {
+		} catch (
+
+		IOException e) {
 			System.err.format("IOException: %s%n", e);
 		}
 	}
@@ -74,8 +76,7 @@ public class CsvReader {
 	 */
 	private void readPersonElevators() {
 
-		try (FileReader reader = new FileReader(Props.ABSOLUTE_PATH + Props.PERSON_ELEVATOR);
-				BufferedReader br = new BufferedReader(reader)) {
+		try (BufferedReader br = new BufferedReader(new FileReader(Props.PARENT_PATH + Props.PERSON_ELEVATOR))) {
 
 			int i = 0;
 			String line;
@@ -107,8 +108,7 @@ public class CsvReader {
 	 */
 	private void readFreightElevators() {
 
-		try (FileReader reader = new FileReader(Props.ABSOLUTE_PATH + Props.FREIGHT_ELEVATOR);
-				BufferedReader br = new BufferedReader(reader)) {
+		try (BufferedReader br = new BufferedReader(new FileReader(Props.PARENT_PATH + Props.FREIGHT_ELEVATOR))) {
 
 			int i = 0;
 			String line;
@@ -140,8 +140,7 @@ public class CsvReader {
 	 */
 	private void readVIPElevators() {
 
-		try (FileReader reader = new FileReader(Props.ABSOLUTE_PATH + Props.VIP_ELEVATOR);
-				BufferedReader br = new BufferedReader(reader)) {
+		try (BufferedReader br = new BufferedReader(new FileReader(Props.PARENT_PATH + Props.VIP_ELEVATOR))) {
 
 			int i = 0;
 			String line;

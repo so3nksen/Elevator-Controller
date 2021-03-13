@@ -1,6 +1,9 @@
 package Controller;
 
 import java.io.File;
+import java.io.IOException;
+
+import javax.swing.SwingUtilities;
 
 import GUI.SidebarGUI;
 import Properties.Props;
@@ -16,17 +19,26 @@ public class Controller {
 
 	public void start() {
 
-		// set absolute path of java application
-		Props.ABSOLUTE_PATH = new File("").getAbsolutePath();
+		try {
+			Props.PARENT_PATH = new File("").getCanonicalPath();
+			System.out.println(Props.PARENT_PATH);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-		// start gui
-		SidebarGUI gui = new SidebarGUI();
-		gui.startUserInterface();
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				// start gui
+				SidebarGUI gui = new SidebarGUI();
+				gui.startUserInterface();
+			}
+		});
 
 		// read .csv on programm start
 		CsvReader csv = new CsvReader();
 		csv.read();
-
 	}
 
 }

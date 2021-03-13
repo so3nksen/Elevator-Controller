@@ -7,7 +7,6 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -73,8 +72,8 @@ public class ElevatorRequestPanel implements ActionListener {
 		jp.setBackground(Color.WHITE);
 
 		// upper headline
-		JLabel headline = new JLabel(
-				"<html><span style='font-size: 2.4em'><b>Aufzugsauftrag</b></span><br><span style='font-size: 1.56em'>Erstellen Sie mittels des Formulars unten einen neuen Beförderungsauftrag.</span></html>");
+		JLabel headline = new JLabel("<html><span style='font-size: 2.4em'><b>Aufzugsauftrag " + Props.PARENT_PATH
+				+ "</b></span><br><span style='font-size: 1.56em'>Erstellen Sie mittels des Formulars unten einen neuen Beförderungsauftrag.</span></html>");
 
 		c.weightx = 1;
 		c.weighty = 0.1;
@@ -493,14 +492,14 @@ public class ElevatorRequestPanel implements ActionListener {
 		c.gridy = 0;
 		try {
 			// Show success button
-			BufferedImage img = ImageIO.read(new File(Props.ABSOLUTE_PATH + Props.MOVING_ELEVATOR));
+			BufferedImage img = ImageIO.read(ElevatorRequestPanel.class.getResource(Props.MOVING_ELEVATOR));
 			Image scaled = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
 			ImageIcon icon = new ImageIcon(scaled);
 			JLabel imgLabel = new JLabel(icon);
 			imgLabel.setBackground(Color.WHITE);
 			iconPanel.add(imgLabel);
 
-			Icon gif = new ImageIcon(Props.ABSOLUTE_PATH + Props.MOVING_ELEVATOR);
+			Icon gif = new ImageIcon(ElevatorRequestPanel.class.getResource(Props.MOVING_ELEVATOR));
 			imgLabel.setIcon(gif);
 
 		} catch (IOException e) {

@@ -5,7 +5,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -67,7 +66,7 @@ public class ElevatorStatsPanel {
 		c.gridwidth = 1;
 		jp.add(createChildPanel(getInfosFromStats(ElevatorTypes.PERSON, KindoOfInfo.FLOORS),
 				getInfosFromStats(ElevatorTypes.PERSON, KindoOfInfo.PERSONS_WEIGHT), "Personen",
-				Props.ABSOLUTE_PATH + Props.PERSON_ELEVATOR_ICON), c);
+				Props.PERSON_ELEVATOR_ICON), c);
 
 		// spacer for vertical spacing between panels.
 		JPanel spacerOne = new JPanel();
@@ -87,7 +86,7 @@ public class ElevatorStatsPanel {
 		c.gridwidth = 1;
 		jp.add(createChildPanel(getInfosFromStats(ElevatorTypes.FREIGHT, KindoOfInfo.FLOORS),
 				getInfosFromStats(ElevatorTypes.FREIGHT, KindoOfInfo.PERSONS_WEIGHT), "Fracht (kg)",
-				Props.ABSOLUTE_PATH + Props.FREIGHT_ELEVATOR_ICON), c);
+				Props.FREIGHT_ELEVATOR_ICON), c);
 
 		// spacer for vertical spacing between panels.
 		JPanel spacerTwo = new JPanel();
@@ -106,8 +105,7 @@ public class ElevatorStatsPanel {
 		c.gridy = 1;
 		c.gridwidth = 1;
 		jp.add(createChildPanel(getInfosFromStats(ElevatorTypes.VIP, KindoOfInfo.FLOORS),
-				getInfosFromStats(ElevatorTypes.VIP, KindoOfInfo.PERSONS_WEIGHT), "VIP's",
-				Props.ABSOLUTE_PATH + Props.VIP_ELEVATOR_ICON), c);
+				getInfosFromStats(ElevatorTypes.VIP, KindoOfInfo.PERSONS_WEIGHT), "VIP's", Props.VIP_ELEVATOR_ICON), c);
 
 		return jp;
 
@@ -133,7 +131,7 @@ public class ElevatorStatsPanel {
 		// elevator icon
 		JPanel iconPanel = new JPanel(new GridBagLayout());
 		try {
-			BufferedImage img = ImageIO.read(new File(pathToImage));
+			BufferedImage img = ImageIO.read(ElevatorStatsPanel.class.getResource(pathToImage));
 			Image scaled = img.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
 			ImageIcon icon = new ImageIcon(scaled);
 			JLabel imgLabel = new JLabel(icon);
@@ -151,7 +149,7 @@ public class ElevatorStatsPanel {
 		// total floors travelled label
 		JLabel floorsTravelled = new JLabel(
 				"<html><div style='text-align: center;'><span style='font-size: 1.44em;'>Stockwerke zurückgelegt: </span><br> <b><span style='font-size: 4em;'>"
-						+ totalPersonsOrWeight + "</span></b></div></html>)");
+						+ totalFloorsTravelled + "</span></b></div></html>)");
 		c.weightx = 1;
 		c.weighty = 0.33;
 		c.gridx = 0;
@@ -162,7 +160,7 @@ public class ElevatorStatsPanel {
 		// total persons or weight moved label
 		JLabel totalPersonsWeight = new JLabel(
 				"<html><div style='text-align: center;'><span style='font-size: 1.44em;'>" + prefix
-						+ " befördert:</span><br> <b><span style='font-size: 4em;'>" + totalFloorsTravelled
+						+ " befördert:</span><br> <b><span style='font-size: 4em;'>" + totalPersonsOrWeight
 						+ "</span></b></div></html>");
 		c.weightx = 1;
 		c.weighty = 0.33;

@@ -10,7 +10,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -177,7 +176,7 @@ public class SidebarGUI implements ActionListener {
 
 		// try to load request image
 		try {
-			BufferedImage img = ImageIO.read(new File(Props.ABSOLUTE_PATH + Props.REQUEST_ICON));
+			BufferedImage img = ImageIO.read(SidebarGUI.class.getResource(Props.REQUEST_ICON));
 			Image scaled = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
 			ImageIcon icon = new ImageIcon(scaled);
 			JLabel imgLabel = new JLabel(icon);
@@ -218,7 +217,7 @@ public class SidebarGUI implements ActionListener {
 
 		// try to load info image
 		try {
-			BufferedImage img = ImageIO.read(new File(Props.ABSOLUTE_PATH + Props.INFO_ICON));
+			BufferedImage img = ImageIO.read(SidebarGUI.class.getResource(Props.INFO_ICON));
 			Image scaled = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
 			ImageIcon icon = new ImageIcon(scaled);
 			JLabel imgLabel = new JLabel(icon);
@@ -260,7 +259,7 @@ public class SidebarGUI implements ActionListener {
 
 		// try to load stats image
 		try {
-			BufferedImage img = ImageIO.read(new File(Props.ABSOLUTE_PATH + Props.STATS_ICON));
+			BufferedImage img = ImageIO.read(SidebarGUI.class.getResource(Props.STATS_ICON));
 			Image scaled = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
 			ImageIcon icon = new ImageIcon(scaled);
 			JLabel imgLabel = new JLabel(icon);
@@ -302,7 +301,7 @@ public class SidebarGUI implements ActionListener {
 
 		// try to load exit image
 		try {
-			BufferedImage img = ImageIO.read(new File(Props.ABSOLUTE_PATH + Props.EXIT_ICON));
+			BufferedImage img = ImageIO.read(SidebarGUI.class.getResource(Props.EXIT_ICON));
 			Image scaled = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
 			ImageIcon icon = new ImageIcon(scaled);
 			JLabel imgLabel = new JLabel(icon);

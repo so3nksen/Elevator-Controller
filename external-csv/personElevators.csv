@@ -1,7 +1,7 @@
 id;maxPersons;maxWeight;music;currentFloor
-1;15;1200;Hells Bells - ACDC;1
-2;15;1200;Hey Jude - The Beatles;1
-3;15;1200;Party Rock Anthem - LMFAO Feat. Lauren Bennett & GoonRock;1
+1;15;1200;Hells Bells - ACDC;26
+2;15;1200;Hey Jude - The Beatles;99
+3;15;1200;Party Rock Anthem - LMFAO Feat. Lauren Bennett & GoonRock;4
 4;15;1200;Macarena - Los Del Rio;4
 5;15;1200;YEAH! - Usher;5
 6;15;1200;Bette Davis Eyes - Kim Carnes;6
@@ -20,7 +20,7 @@ id;maxPersons;maxWeight;music;currentFloor
 19;15;1200;Upside Down - Diana Ross;19
 20;15;1200;Billie Jean - Michael Jackson;20
 21;30;2400;Gangsta’s Paradise - Coolio Feat. L.V.;100
-22;30;2400;Just the Way You Are - Bruno Mars;22
+22;30;2400;Just the Way You Are - Bruno Mars;1
 23;30;2400;We Found Love - Rihanna Feat. Calvin Harris;23
 24;30;2400;Too Close - Next;24
 25;30;2400;Another One Bites the Dust - Queen;25

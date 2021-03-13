@@ -80,7 +80,7 @@ public class ElevatorInfoPanel {
 						} else if (e instanceof VipElevator) {
 							((VipElevator) e).setMaxSpeed(getValueAt(row, 5).toString());
 						}
-						ImageIcon icon = new ImageIcon(Props.ABSOLUTE_PATH + Props.CHECK_ICON);
+						ImageIcon icon = new ImageIcon(Props.PARENT_PATH + Props.CHECK_ICON);
 						Image scaled = icon.getImage().getScaledInstance(42, 42, 0);
 						JOptionPane.showMessageDialog(null, "Attribut erfolgreich geändert!", "Änderung vorgenommen",
 								JOptionPane.OK_OPTION, new ImageIcon(scaled));
