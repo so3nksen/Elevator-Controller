@@ -24,29 +24,29 @@ public class Props {
 	public static final String STATISTICS = "/external-csv/statistics.csv";
 
 	/* Path to stats icon */
-	public static final String STATS_ICON = "/statsIcon.png";
+	public static final String STATS_ICON = "/assets/statsIcon.png";
 
 	/* Path to request icon */
-	public static final String REQUEST_ICON = "/requestIcon.png";
+	public static final String REQUEST_ICON = "/assets/requestIcon.png";
 
 	/* Path to exit icon */
-	public static final String EXIT_ICON = "/exitIcon.png";
+	public static final String EXIT_ICON = "/assets/exitIcon.png";
 
 	/* Path to indo icon */
-	public static final String INFO_ICON = "/infoIcon.png";
+	public static final String INFO_ICON = "/assets/infoIcon.png";
 
 	/* Path to personelevator icon */
-	public static final String PERSON_ELEVATOR_ICON = "/personElevator.png";
+	public static final String PERSON_ELEVATOR_ICON = "/assets/personElevator.png";
 
 	/* Path to freightelevator icon */
-	public static final String FREIGHT_ELEVATOR_ICON = "/freightElevator.png";
+	public static final String FREIGHT_ELEVATOR_ICON = "/assets/freightElevator.png";
 
 	/* Path to vipelevator icon */
-	public static final String VIP_ELEVATOR_ICON = "/vipElevator.png";
+	public static final String VIP_ELEVATOR_ICON = "/assets/vipElevator.png";
 
 	/* Path to check */
-	public static final String CHECK_ICON = "/check.png";
+	public static final String CHECK_ICON = "/assets/check.png";
 
 	/* Path to moving elevator gif */
-	public static final String MOVING_ELEVATOR = "/animatedElevator.gif";
+	public static final String MOVING_ELEVATOR = "/assets/animatedElevator.gif";
 }
