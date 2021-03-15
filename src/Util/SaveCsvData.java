@@ -107,9 +107,7 @@ public class SaveCsvData {
 	private void writeToFile(String string, String path) {
 
 		try (PrintWriter writer = new PrintWriter(new File(Props.PARENT_PATH + path))) {
-
 			writer.write(string);
-
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
 		}
