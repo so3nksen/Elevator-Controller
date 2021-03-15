@@ -21,9 +21,7 @@ public class Controller {
 
 		try {
 			Props.PARENT_PATH = new File("").getCanonicalPath();
-			System.out.println(Props.PARENT_PATH);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
